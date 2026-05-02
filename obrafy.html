@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obrafy · Automatización para autónomos y constructoras pequeñas</title>
+<meta name="description" content="Eliminamos el papeleo administrativo de las obras para constructores autónomos, equipos de 1 a 5 empleados y pymes de construcción en España.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #f7fbff;
+  --bg-2: #eef7f5;
+  --surface: rgba(255,255,255,0.64);
+  --surface-strong: rgba(255,255,255,0.84);
+  --ink: #13211f;
+  --ink-soft: #4c5c59;
+  --muted: #71807d;
+  --line: rgba(19,33,31,0.11);
+  --line-strong: rgba(19,33,31,0.18);
+  --blue: #3b82f6;
+  --cyan: #16c4d8;
+  --mint: #31d09b;
+  --lime: #a6e635;
+  --amber: #f7c84b;
+  --coral: #ff6f61;
+  --violet: #8b7cf6;
+  --olive: #0b8b66;
+  --rust: #ff6f61;
+  --yellow: #f7c84b;
+  --white: #fff;
+  --shadow: 0 24px 70px rgba(28, 76, 91, 0.15);
+  --shadow-soft: 0 14px 38px rgba(28, 76, 91, 0.10);
+  --r: 22px;
+  --r-sm: 14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(49,208,155,0.28), transparent 31rem),
+    radial-gradient(circle at 90% 8%, rgba(59,130,246,0.22), transparent 28rem),
+    linear-gradient(135deg, #fbfeff 0%, #f3fbf8 42%, #eef6ff 100%);
+  color: var(--ink);
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  width: 34rem;
+  height: 34rem;
+  border-radius: 46% 54% 68% 32% / 38% 50% 50% 62%;
+  filter: blur(26px);
+  opacity: 0.42;
+  pointer-events: none;
+  z-index: -1;
+  animation: liquidDrift 18s ease-in-out infinite alternate;
+}
+body::before { left: -12rem; top: 22vh; background: linear-gradient(135deg, var(--cyan), var(--mint)); }
+body::after { right: -12rem; bottom: 8vh; background: linear-gradient(135deg, var(--violet), var(--amber)); animation-delay: -7s; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+.display-serif, .hero-h1, .pain-head h2, .results-intro-left h2, .how-header h2,
+.cases-head h2, .compare-head h2, .about-left h2, .testi-head h2, .faq-head h2,
+.contact-left h2, .contact-right h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+}
+.display-block, .nav-logo, .footer-logo, .hero-stat-main, .hero-bottom-num, .metric-big,
+.metric-bg-num, .how-step-num, .case-saving-bar .label-from, .case-saving-bar .saving,
+.about-card-name, .about-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.02em;
+}
+.label-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.label-text::before {
+  content: '';
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--mint), var(--blue));
+  box-shadow: 0 0 20px rgba(49,208,155,0.5);
+}
+
+.container { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+section { padding: 6.5rem 0; position: relative; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 46px;
+  padding: 0.86rem 1.35rem;
+  border: 1px solid rgba(255,255,255,0.55);
+  border-radius: 999px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 800;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+}
+.btn-primary, .btn-yellow {
+  color: #071714;
+  background: linear-gradient(135deg, var(--lime), var(--mint) 45%, var(--cyan));
+  box-shadow: 0 16px 34px rgba(49,208,155,0.28);
+}
+.btn-outline {
+  background: rgba(255,255,255,0.58);
+  color: var(--ink);
+  border-color: rgba(19,33,31,0.12);
+  backdrop-filter: blur(18px);
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 22px 44px rgba(28,76,91,0.18); }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: rgba(255,255,255,0.58);
+  backdrop-filter: blur(16px);
+}
+.tag--olive, .tag--yellow, .tag--rust { border-color: rgba(49,208,155,0.25); color: var(--ink); background: rgba(255,255,255,0.68); }
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(247,251,255,0.72);
+  border-bottom: 1px solid rgba(19,33,31,0.08);
+  backdrop-filter: blur(22px) saturate(150%);
+}
+.nav-inner {
+  max-width: 1180px;
+  height: 72px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.nav-logo { font-size: 1.85rem; color: var(--ink); }
+.nav-logo em, .footer-logo em { color: var(--mint); font-style: normal; }
+.nav-links { list-style: none; display: flex; align-items: center; gap: 1.65rem; }
+.nav-links a { font-size: 0.84rem; font-weight: 800; color: var(--ink-soft); border-bottom: 2px solid transparent; padding-bottom: 3px; }
+.nav-links a:hover { color: var(--ink); }
+.nav-right { display: flex; align-items: center; gap: 0.8rem; }
+.nav-tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--ink-soft);
+  background: rgba(255,255,255,0.58);
+  border: 1px solid var(--line);
+}
+.nav-tel::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 16px rgba(49,208,155,0.8); }
+
+#hero {
+  min-height: 100vh;
+  padding: 9rem 2rem 2rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+  grid-template-rows: 1fr auto;
+  gap: 1.2rem;
+}
+#hero::after { display: none; }
+.hero-left, .hero-right-top, .hero-right-pills, .hero-bottom,
+.pain-grid, .pain-risk-inner, .metrics-grid, .how-steps, .guarantee,
+.cases-tabs-row, .cases-body, .compare-tbl, .about-grid, .testi-grid, .faq-list,
+.contact-split {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(26px) saturate(155%);
+}
+.hero-left {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  min-height: 610px;
+  padding: clamp(2rem, 5vw, 5rem);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-left::before {
+  content: '';
+  position: absolute;
+  inset: 1rem;
+  border-radius: calc(var(--r) - 8px);
+  background:
+    radial-gradient(circle at 18% 22%, rgba(166,230,53,0.35), transparent 13rem),
+    radial-gradient(circle at 88% 68%, rgba(22,196,216,0.24), transparent 16rem);
+  pointer-events: none;
+}
+.hero-watermark {
+  position: absolute;
+  right: -1rem;
+  bottom: -4rem;
+  font-size: clamp(12rem, 24vw, 24rem);
+  line-height: 1;
+  color: rgba(19,33,31,0.045);
+  pointer-events: none;
+}
+.hero-tag-row { position: relative; z-index: 1; display: flex; align-items: center; gap: 1rem; margin-bottom: 1.7rem; }
+.hero-eyebrow-sep { width: 38px; height: 2px; border-radius: 999px; background: linear-gradient(90deg, var(--mint), var(--blue)); }
+.hero-eyebrow { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-soft); }
+.hero-h1 {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  font-size: clamp(3.25rem, 6.2vw, 7rem);
+  line-height: 0.92;
+  margin-bottom: 1.6rem;
+}
+.hero-h1 em {
+  font-style: italic;
+  background: linear-gradient(100deg, var(--blue), var(--mint), var(--lime));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-sub { position: relative; z-index: 1; max-width: 610px; color: var(--ink-soft); font-size: 1.08rem; line-height: 1.7; margin-bottom: 2.1rem; }
+.hero-ctas { position: relative; z-index: 1; display: flex; gap: 0.85rem; flex-wrap: wrap; }
+.hero-ico-strip {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+.hero-3d-icon,
+.mini-3d-icon {
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,0.78);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.96), rgba(255,255,255,0.52) 44%, rgba(49,208,155,0.26)),
+    linear-gradient(145deg, rgba(255,255,255,0.82), rgba(22,196,216,0.20));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    0 16px 28px rgba(28,76,91,0.16);
+  backdrop-filter: blur(18px) saturate(155%);
+}
+.hero-3d-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 20px;
+  font-size: 1.85rem;
+  transform: rotate(var(--tilt, -4deg));
+  animation: iconFloat 5.5s ease-in-out infinite;
+}
+.hero-3d-icon:nth-child(2) { animation-delay: -1.4s; }
+.hero-3d-icon:nth-child(3) { animation-delay: -2.8s; }
+.hero-3d-icon:nth-child(4) { animation-delay: -4.2s; }
+.mini-3d-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  font-size: 1.15rem;
+}
+.audience-pill .mini-3d-icon {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+}
+.audience-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 2.2rem;
+}
+.audience-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.55);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-weight: 800;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px);
+}
+.audience-pill strong { display: block; color: var(--ink); }
+.hero-right {
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  gap: 1.2rem;
+}
+.hero-right-top {
+  position: relative;
+  overflow: hidden;
+  min-height: 390px;
+  padding: 2.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.hero-right-top::before {
+  content: '';
+  position: absolute;
+  inset: -30%;
+  background:
+    conic-gradient(from 140deg at 48% 45%, rgba(22,196,216,0.06), rgba(49,208,155,0.42), rgba(247,200,75,0.35), rgba(139,124,246,0.3), rgba(22,196,216,0.06));
+  animation: liquidSpin 16s linear infinite;
+}
+.hero-stat-main { position: relative; z-index: 1; font-size: clamp(5rem, 10vw, 9rem); line-height: 0.86; color: var(--ink); }
+.hero-right-top .hero-stat-main { margin-top: auto; }
+.hero-stat-desc { position: relative; z-index: 1; color: var(--ink-soft); font-size: 0.98rem; line-height: 1.55; max-width: 300px; }
+.hero-stat-desc strong { color: var(--ink); }
+.hero-right-pills {
+  padding: 1.4rem;
+  display: grid;
+  gap: 0.16rem;
+}
+.hero-pill { display: flex; align-items: center; gap: 0.65rem; color: var(--ink-soft); font-weight: 700; font-size: 0.86rem; line-height: 1.08; }
+.hero-pill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 14px rgba(49,208,155,0.7); flex: 0 0 auto; }
+.hero-right-top .hero-ico-strip {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+.hero-bottom {
+  grid-column: 1 / 3;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  overflow: hidden;
+}
+.hero-bottom-stat { padding: 1.35rem; border-right: 1px solid var(--line); }
+.hero-bottom-stat:last-child { border-right: 0; }
+.hero-bottom-num { font-size: 2.5rem; line-height: 1; color: var(--blue); }
+.hero-bottom-label { margin-top: 0.25rem; color: var(--ink-soft); font-size: 0.78rem; font-weight: 700; line-height: 1.35; }
+
+#pain, #compare, footer {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(49,208,155,0.15), transparent 24rem),
+    linear-gradient(135deg, #10211f, #173030 62%, #12333a);
+}
+#pain .label-text, #compare .label-text { color: rgba(255,255,255,0.72); }
+#pain .label-text::before, #compare .label-text::before { background: var(--lime); }
+.pain-head {
+  max-width: 1180px;
+  margin: 0 auto 3rem;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+}
+.pain-head h2, .compare-head h2 { margin-top: 1rem; color: white; font-size: clamp(2.5rem, 5vw, 4.8rem); line-height: 0.95; }
+.pain-head h2 em, .compare-head h2 em { color: var(--lime); font-style: italic; }
+.pain-head-right { max-width: 430px; }
+.pain-head-right p { color: rgba(255,255,255,0.66); }
+.pain-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  overflow: hidden;
+  background: rgba(255,255,255,0.08);
+}
+.pain-card { position: relative; min-height: 280px; padding: 2rem; border-right: 1px solid rgba(255,255,255,0.12); color: white; }
+.pain-card:last-child { border-right: 0; }
+.pain-card:hover { background: rgba(255,255,255,0.08); }
+.pain-num { position: absolute; top: 1rem; right: 1.25rem; font-family: 'Bebas Neue', sans-serif; font-size: 4.2rem; line-height: 1; color: rgba(255,255,255,0.08); }
+.pain-icon { width: 46px; height: 46px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.4rem; color: var(--lime); background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.14); }
+.pain-card h4 { font-size: 1rem; line-height: 1.3; margin-bottom: 0.8rem; }
+.pain-card p { color: rgba(255,255,255,0.62); font-size: 0.9rem; line-height: 1.62; }
+.pain-time { display: inline-flex; margin-top: 1.1rem; color: var(--lime); font-size: 0.76rem; font-weight: 800; }
+.pain-risk { max-width: 1180px; margin: 1.3rem auto 0; padding: 0 2rem; }
+.pain-risk-inner { padding: 1.35rem 1.6rem; display: flex; align-items: center; gap: 1.2rem; background: rgba(255,255,255,0.10); color: white; }
+.pain-risk-badge { flex: 0 0 auto; padding: 0.5rem 0.8rem; border-radius: 999px; background: rgba(255,111,97,0.18); color: #ffd4cf; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
+.pain-risk-text { color: rgba(255,255,255,0.68); font-size: 0.94rem; }
+.pain-risk-text strong { color: white; }
+
+#results, #cases, #about, #faq { background: transparent; }
+#how, #testimonials, #contact { background: rgba(255,255,255,0.22); }
+.results-intro {
+  display: grid;
+  grid-template-columns: 0.95fr 1fr;
+  gap: 3rem;
+  align-items: end;
+  margin-bottom: 2.2rem;
+}
+.results-intro-left h2, .how-header h2, .cases-head h2, .about-left h2, .testi-head h2, .faq-head h2 {
+  margin-top: 1rem;
+  font-size: clamp(2.35rem, 4.4vw, 4.5rem);
+  line-height: 0.96;
+}
+.results-intro-left h2 em, .how-header h2 em, .cases-head h2 em, .about-left h2 em, .testi-head h2 em, .faq-head h2 em { color: var(--blue); font-style: italic; }
+.results-intro-right p { color: var(--ink-soft); font-size: 1rem; line-height: 1.75; }
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow: hidden;
+}
+.metric-card {
+  min-height: 250px;
+  position: relative;
+  padding: 2rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.metric-card:nth-child(3n) { border-right: 0; }
+.metric-card:nth-child(n+4) { border-bottom: 0; }
+.metric-card:hover { background: rgba(255,255,255,0.76); }
+.metric-card--accent {
+  background: linear-gradient(135deg, rgba(19,33,31,0.94), rgba(15,70,73,0.88));
+  color: white;
+}
+.metric-big { font-size: clamp(4.2rem, 8vw, 8rem); line-height: 0.9; color: var(--blue); }
+.metric-card--accent .metric-big { color: var(--lime); }
+.metric-unit { font-size: 0.42em; vertical-align: super; }
+.metric-label { font-weight: 900; color: var(--ink); margin: 0.45rem 0 1rem; }
+.metric-card--accent .metric-label { color: rgba(255,255,255,0.86); }
+.metric-arrow { display: flex; gap: 0.55rem; flex-wrap: wrap; color: var(--muted); font-size: 0.84rem; }
+.metric-from { text-decoration: line-through; color: var(--coral); }
+.metric-to { color: #0b8b66; font-weight: 900; }
+.metric-card--accent .metric-to { color: var(--lime); }
+.metric-bg-num { position: absolute; right: -0.4rem; bottom: -1.8rem; font-size: 9rem; line-height: 1; color: rgba(19,33,31,0.045); pointer-events: none; }
+.metric-card--accent .metric-bg-num { color: rgba(255,255,255,0.06); }
+.results-note { margin-top: 1rem; color: var(--muted); font-size: 0.82rem; font-style: italic; }
+
+.how-header, .cases-head, .compare-head, .testi-head, .faq-head { margin-bottom: 2.2rem; }
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow: hidden;
+}
+.how-step { position: relative; padding: 2rem; border-right: 1px solid var(--line); }
+.how-step:last-child { border-right: 0; }
+.how-step-num { font-size: 5rem; line-height: 0.9; color: rgba(59,130,246,0.18); }
+.how-step h3 { margin: 1rem 0 0.8rem; font-size: 1.2rem; line-height: 1.25; }
+.how-step p { color: var(--ink-soft); font-size: 0.92rem; line-height: 1.68; }
+.how-step-tag { display: inline-flex; margin-top: 1.25rem; padding: 0.45rem 0.75rem; border-radius: 999px; background: rgba(49,208,155,0.14); color: #087358; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.07em; text-transform: uppercase; }
+.guarantee { margin-top: 1.2rem; padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 1rem; background: rgba(255,255,255,0.78); }
+.guarantee-check { width: 48px; height: 48px; border-radius: 16px; display: grid; place-items: center; color: #071714; background: linear-gradient(135deg, var(--lime), var(--mint)); font-weight: 900; }
+.guarantee-body h4 { margin-bottom: 0.2rem; }
+.guarantee-body p { color: var(--ink-soft); font-size: 0.92rem; }
+
+.cases-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.cases-head p { max-width: 430px; color: var(--ink-soft); }
+.cases-tabs-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 0.55rem;
+  padding: 0.55rem;
+  margin-bottom: 0.9rem;
+  overflow-x: auto;
+}
+.cases-tab {
+  min-height: 58px;
+  padding: 0.85rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 900;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+.cases-tab.active {
+  color: #071714;
+  background: linear-gradient(135deg, rgba(166,230,53,0.96), rgba(49,208,155,0.92));
+  box-shadow: 0 14px 30px rgba(49,208,155,0.24);
+}
+.cases-tab:not(.active):hover { background: rgba(255,255,255,0.58); color: var(--ink); }
+.cases-body { overflow: hidden; }
+.case-panel { display: none; }
+.case-panel.active {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.case-col { min-height: 430px; padding: clamp(1.5rem, 3vw, 2.6rem); }
+.case-col-before {
+  background: linear-gradient(135deg, rgba(255,111,97,0.14), rgba(255,255,255,0.54));
+  border-right: 1px solid var(--line);
+}
+.case-col-after {
+  background: linear-gradient(135deg, rgba(49,208,155,0.18), rgba(255,255,255,0.68));
+}
+.case-col-label {
+  display: inline-flex;
+  padding: 0.42rem 0.72rem;
+  border-radius: 999px;
+  margin-bottom: 1.1rem;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.case-col-before .case-col-label { color: #9e2d25; background: rgba(255,111,97,0.14); }
+.case-col-after .case-col-label { color: #087358; background: rgba(49,208,155,0.16); }
+.case-col h3 { font-size: clamp(1.45rem, 2.4vw, 2.1rem); line-height: 1.12; margin-bottom: 1.2rem; }
+.case-list { list-style: none; display: flex; flex-direction: column; gap: 0.72rem; }
+.case-list li {
+  position: relative;
+  padding-left: 1.45rem;
+  color: var(--ink-soft);
+  line-height: 1.48;
+  font-size: 0.93rem;
+}
+.case-col-before .case-list li::before,
+.case-col-after .case-list li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 900;
+}
+.case-col-before .case-list li::before { content: '-'; color: var(--coral); }
+.case-col-after .case-list li::before { content: '+'; color: #0b8b66; }
+.case-saving-bar {
+  grid-column: 1 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: 1.5rem clamp(1.5rem, 3vw, 2.6rem);
+  color: white;
+  background: linear-gradient(135deg, #13211f, #0e4b4e 58%, #16726b);
+}
+.case-saving-bar .label-block,
+.case-saving-bar .saving-block { display: flex; flex-direction: column; gap: 0.16rem; }
+.case-saving-bar .saving-block { align-items: flex-end; }
+.case-saving-bar .label-prefix,
+.case-saving-bar .saving-prefix { color: rgba(255,255,255,0.56); font-size: 0.68rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
+.case-saving-bar .label-from { color: rgba(255,255,255,0.42); font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1; text-decoration: line-through; text-decoration-color: var(--coral); text-decoration-thickness: 3px; }
+.case-saving-bar .label-arrow { color: rgba(255,255,255,0.45); font-size: 1.4rem; }
+.case-saving-bar .saving { color: var(--lime); font-size: clamp(2rem, 4.6vw, 3.4rem); line-height: 1; text-align: right; }
+
+.compare-head { color: white; }
+.compare-tbl {
+  width: 100%;
+  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(255,255,255,0.08);
+}
+.compare-tbl th, .compare-tbl td { padding: 1rem 1.15rem; text-align: left; vertical-align: middle; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.compare-tbl thead th { color: rgba(255,255,255,0.55); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.compare-tbl td:first-child { color: rgba(255,255,255,0.78); font-weight: 800; }
+.compare-tbl td.bad { color: #ffaaa1; }
+.compare-tbl td.ok { color: rgba(255,255,255,0.48); }
+.compare-tbl td.good { color: #93f1c8; }
+.compare-tbl .col-ours, .compare-tbl td.col-ours { color: var(--lime); font-weight: 900; }
+
+.about-grid, .contact-split { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+.about-left, .about-right, .contact-left, .contact-right { padding: clamp(2rem, 4vw, 4rem); }
+.about-left { border-right: 1px solid var(--line); }
+.about-left p { color: var(--ink-soft); line-height: 1.72; margin-bottom: 1rem; }
+.about-facts { display: grid; gap: 0.75rem; margin-top: 2rem; }
+.about-fact { padding: 1rem; border-radius: 18px; background: rgba(255,255,255,0.58); border: 1px solid var(--line); color: var(--ink-soft); font-size: 0.88rem; }
+.about-fact-icon { margin-right: 0.5rem; }
+.about-right { background: linear-gradient(135deg, rgba(19,33,31,0.92), rgba(16,78,78,0.86)); color: white; }
+.about-card-name { font-size: 3.2rem; line-height: 1; color: var(--lime); }
+.about-card-role { color: rgba(255,255,255,0.56); font-size: 0.76rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; margin: 0.25rem 0 1.8rem; }
+.about-quote { color: rgba(255,255,255,0.86); font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; line-height: 1.62; border-left: 3px solid var(--lime); padding-left: 1rem; }
+.about-stats-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-top: 2rem; }
+.about-stat-cell { padding: 1rem; border-radius: 18px; text-align: center; background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.12); }
+.about-stat-num { font-size: 2.7rem; color: var(--lime); line-height: 1; }
+.about-stat-lbl { color: rgba(255,255,255,0.56); font-size: 0.72rem; }
+
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); overflow: hidden; }
+.testi-card { padding: 2rem; border-right: 1px solid var(--line); }
+.testi-card:last-child { border-right: 0; }
+.testi-stars { color: #f0b429; margin-bottom: 1rem; letter-spacing: 0.08em; }
+.testi-quote { font-family: 'Playfair Display', serif; font-style: italic; color: var(--ink); line-height: 1.62; margin-bottom: 1.5rem; }
+.testi-quote strong { color: var(--blue); }
+.testi-sep { height: 1px; background: var(--line); margin-bottom: 1rem; }
+.testi-person { display: flex; align-items: center; gap: 0.8rem; }
+.testi-avatar { width: 42px; height: 42px; border-radius: 16px; display: grid; place-items: center; background: linear-gradient(135deg, var(--blue), var(--mint)); color: white; font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; }
+.testi-name { font-weight: 900; }
+.testi-co { color: var(--muted); font-size: 0.78rem; }
+
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item:last-child { border-bottom: 0; }
+.faq-q { padding: 1.35rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; cursor: pointer; font-weight: 900; }
+.faq-q:hover { background: rgba(255,255,255,0.5); }
+.faq-item.open .faq-q { color: #087358; }
+.faq-caret { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; flex: 0 0 auto; background: rgba(49,208,155,0.14); transition: transform 0.25s ease; }
+.faq-item.open .faq-caret { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; padding: 0 1.5rem; transition: max-height 0.32s ease, padding 0.32s ease; }
+.faq-item.open .faq-a { max-height: 420px; padding: 0 1.5rem 1.35rem; }
+.faq-a p { color: var(--ink-soft); line-height: 1.72; font-size: 0.93rem; }
+.faq-a strong { color: var(--ink); }
+
+.contact-left {
+  color: white;
+  background: linear-gradient(135deg, #13211f, #124f52 70%, #18726e);
+  position: relative;
+  overflow: hidden;
+}
+.contact-left::before {
+  content: '';
+  position: absolute;
+  width: 23rem;
+  height: 23rem;
+  right: -8rem;
+  bottom: -8rem;
+  border-radius: 45% 55% 62% 38% / 40% 48% 52% 60%;
+  background: radial-gradient(circle, rgba(166,230,53,0.38), transparent 68%);
+}
+.contact-left .label-text { color: rgba(255,255,255,0.72); }
+.contact-left h2 { position: relative; margin: 1rem 0 1.2rem; font-size: clamp(2.2rem, 4vw, 4rem); line-height: 0.98; }
+.contact-left h2 em { color: var(--lime); font-style: italic; }
+.contact-left p { position: relative; color: rgba(255,255,255,0.68); line-height: 1.72; margin-bottom: 2rem; }
+.contact-trust-list { position: relative; display: grid; gap: 0.8rem; }
+.contact-trust-item { display: flex; align-items: center; gap: 0.7rem; color: rgba(255,255,255,0.7); font-size: 0.88rem; }
+.trust-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lime); flex: 0 0 auto; }
+.contact-right { background: rgba(255,255,255,0.72); }
+.contact-right h3 { font-size: 2rem; line-height: 1.05; margin-bottom: 0.5rem; }
+.contact-right .sub { color: var(--ink-soft); margin-bottom: 2rem; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; margin-bottom: 0.4rem; color: var(--muted); font-size: 0.75rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+.form-group input, .form-group select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 16px;
+  background: rgba(255,255,255,0.72);
+  color: var(--ink);
+  font: inherit;
+  outline: none;
+}
+.form-group input:focus, .form-group select:focus { border-color: rgba(49,208,155,0.7); box-shadow: 0 0 0 4px rgba(49,208,155,0.14); }
+.form-submit { width: 100%; margin-top: 0.4rem; }
+.form-note { color: var(--muted); font-size: 0.78rem; text-align: center; margin-top: 0.9rem; }
+
+footer { padding: 2.2rem 0; color: rgba(255,255,255,0.7); }
+.footer-row { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; flex-wrap: wrap; }
+.footer-logo { color: white; font-size: 1.5rem; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 1.1rem; }
+.footer-links a { color: rgba(255,255,255,0.52); font-size: 0.82rem; }
+.footer-links a:hover { color: white; }
+.footer-copy { color: rgba(255,255,255,0.38); font-size: 0.78rem; }
+
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal:nth-child(2) { transition-delay: 0.08s; }
+.reveal:nth-child(3) { transition-delay: 0.16s; }
+.reveal:nth-child(4) { transition-delay: 0.24s; }
+
+@keyframes liquidDrift {
+  0% { transform: translate3d(0,0,0) rotate(0deg) scale(1); border-radius: 46% 54% 68% 32% / 38% 50% 50% 62%; }
+  100% { transform: translate3d(4rem,-3rem,0) rotate(14deg) scale(1.08); border-radius: 62% 38% 44% 56% / 55% 40% 60% 45%; }
+}
+@keyframes liquidSpin {
+  to { transform: rotate(360deg); }
+}
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0) rotate(var(--tilt, -4deg)); }
+  50% { transform: translateY(-9px) rotate(calc(var(--tilt, -4deg) * -1)); }
+}
+
+@media (max-width: 1040px) {
+  #hero { grid-template-columns: 1fr; grid-template-rows: auto auto auto; }
+  .hero-left, .hero-right, .hero-bottom { grid-column: 1; }
+  .hero-right { grid-row: 2; grid-template-columns: 1fr 1fr; }
+  .hero-bottom { grid-row: 3; grid-template-columns: repeat(3, 1fr); }
+  .pain-grid { grid-template-columns: repeat(2, 1fr); }
+  .pain-card:nth-child(2) { border-right: 0; }
+  .pain-card:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,0.12); }
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .metric-card:nth-child(3n) { border-right: 1px solid var(--line); }
+  .metric-card:nth-child(2n) { border-right: 0; }
+  .metric-card:nth-child(n+4) { border-bottom: 1px solid var(--line); }
+  .metric-card:nth-child(n+5) { border-bottom: 0; }
+  .case-panel.active, .about-grid, .contact-split { grid-template-columns: 1fr; }
+  .case-col-before, .about-left { border-right: 0; border-bottom: 1px solid var(--line); }
+  .case-saving-bar { grid-column: 1; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .testi-card { border-right: 0; border-bottom: 1px solid var(--line); }
+  .testi-card:last-child { border-bottom: 0; }
+}
+@media (max-width: 760px) {
+  .container, .nav-inner { padding-left: 1rem; padding-right: 1rem; }
+  section { padding: 3.1rem 0; }
+  .nav-inner { height: 58px; }
+  .nav-logo { font-size: 1.55rem; }
+  .nav-right .btn { min-height: 40px; padding: 0.62rem 0.95rem; font-size: 0.84rem; }
+  .nav-links, .nav-tel { display: none; }
+  #hero { padding: 4.45rem 0.75rem 0.75rem; gap: 0.75rem; }
+  .hero-left { min-height: auto; padding: 1.3rem; border-radius: 18px; }
+  .hero-tag-row { margin-bottom: 1rem; gap: 0.65rem; }
+  .hero-eyebrow { font-size: 0.66rem; letter-spacing: 0.11em; }
+  .hero-h1 { font-size: clamp(2.65rem, 11vw, 3.55rem); line-height: 0.9; margin-bottom: 1rem; }
+  .hero-sub { font-size: 0.98rem; line-height: 1.52; margin-bottom: 1.2rem; }
+  .hero-ctas { gap: 0.55rem; }
+  .hero-ctas .btn { width: 100%; }
+  .hero-right { grid-template-columns: 1fr; }
+  .hero-right-top { min-height: 255px; padding: 1.25rem; border-radius: 18px; }
+  .hero-right-top .hero-ico-strip { margin-bottom: 0.8rem; gap: 0.5rem; }
+  .hero-3d-icon { width: 44px; height: 44px; border-radius: 16px; font-size: 1.45rem; }
+  .hero-right-top .hero-stat-main { font-size: 4.8rem; }
+  .hero-stat-desc { font-size: 0.9rem; line-height: 1.42; max-width: none; }
+  .hero-right-pills { padding: 0.85rem 1rem; border-radius: 18px; gap: 0.04rem; }
+  .hero-pill { font-size: 0.82rem; line-height: 1; gap: 0.5rem; }
+  .hero-bottom { grid-template-columns: repeat(2, 1fr); }
+  .hero-bottom-stat { padding: 0.85rem; border-bottom: 1px solid var(--line); }
+  .hero-bottom-num { font-size: 2rem; }
+  .hero-bottom-label { font-size: 0.72rem; line-height: 1.22; }
+  .hero-ctas, .pain-head, .results-intro, .cases-head, .pain-risk-inner, .guarantee, .case-saving-bar { flex-direction: column; align-items: stretch; }
+  .audience-strip { grid-template-columns: 1fr; gap: 0.55rem; margin-bottom: 1.2rem; }
+  .audience-pill { padding: 0.72rem; border-radius: 16px; font-size: 0.84rem; }
+  .mini-3d-icon { width: 32px; height: 32px; border-radius: 12px; font-size: 1rem; }
+  .pain-head, .results-intro { display: block; }
+  .pain-head { margin-bottom: 1.4rem; }
+  .pain-head h2, .compare-head h2 { font-size: clamp(2.2rem, 11vw, 3.1rem); }
+  .pain-head-right, .cases-head p { margin-top: 0.8rem; max-width: none; }
+  .pain-grid, .metrics-grid, .how-steps { grid-template-columns: 1fr; }
+  .pain-card, .how-step, .metric-card { border-right: 0 !important; border-bottom: 1px solid var(--line); }
+  .pain-card { min-height: auto; padding: 1.25rem; }
+  .pain-card { border-bottom-color: rgba(255,255,255,0.12); }
+  .pain-icon { display: none; }
+  .pain-time { margin-top: 0.8rem; }
+  .results-intro-left h2, .how-header h2, .cases-head h2, .about-left h2, .testi-head h2, .faq-head h2 { font-size: clamp(2.05rem, 10vw, 3rem); margin-top: 0.75rem; }
+  .results-intro { margin-bottom: 1.4rem; }
+  .metric-card, .how-step, .testi-card { min-height: auto; padding: 1.25rem; }
+  .metric-big { font-size: 4.2rem; }
+  .how-header, .cases-head, .compare-head, .testi-head, .faq-head { margin-bottom: 1.4rem; }
+  .guarantee { padding: 1rem; gap: 0.7rem; }
+  .metric-card:last-child, .how-step:last-child { border-bottom: 0; }
+  .cases-tabs-row { grid-template-columns: repeat(4, minmax(165px, 1fr)); padding: 0.4rem; margin-bottom: 0.65rem; }
+  .cases-tab { min-height: 46px; padding: 0.65rem 0.8rem; font-size: 0.75rem; }
+  .case-col { min-height: auto; padding: 1.2rem; }
+  .case-col h3 { font-size: 1.35rem; margin-bottom: 0.85rem; }
+  .case-list { gap: 0.48rem; }
+  .case-list li { font-size: 0.86rem; line-height: 1.36; }
+  .case-saving-bar { padding: 1rem 1.2rem; gap: 0.7rem; }
+  .case-saving-bar .saving-block { align-items: flex-start; }
+  .case-saving-bar .saving { text-align: left; }
+  .about-left, .about-right, .contact-left, .contact-right { padding: 1.35rem; }
+  .faq-q { padding: 1rem; font-size: 0.9rem; }
+  .faq-item.open .faq-a { padding: 0 1rem 1rem; }
+  .footer-row { align-items: flex-start; flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">OBRA<em>FY</em></div>
+    <ul class="nav-links">
+      <li><a href="#pain">El problema</a></li>
+      <li><a href="#results">Resultados</a></li>
+      <li><a href="#how">Cómo funciona</a></li>
+      <li><a href="#cases">Casos</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-tel">691 907 292</span>
+      <a href="#contact" class="btn btn-primary">Hablar con nosotros</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-watermark">10</div>
+    <div class="hero-tag-row">
+      <div class="hero-eyebrow-sep"></div>
+      <span class="hero-eyebrow">Para constructores autónomos, equipos y pymes · España</span>
+    </div>
+    <h1 class="hero-h1">
+      El constructor<br>
+      no debería<br>
+      perder el tiempo<br>
+      con <em>papeleo.</em>
+    </h1>
+    <p class="hero-sub">
+      Obrafy es para autónomos de la construcción, reformistas y constructoras de cualquier tamaño. Automatizamos presupuestos, subcontratas, partes y certificaciones. Sin software nuevo. Sin formación. Desde el primer día.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary">Cuéntanos tu situación →</a>
+      <a href="#how" class="btn btn-outline">Ver cómo funciona</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-right-top">
+      <div class="hero-ico-strip" aria-label="Símbolos de obra">
+        <span class="hero-3d-icon" style="--tilt:-6deg">🧱</span>
+        <span class="hero-3d-icon" style="--tilt:5deg">🦺</span>
+        <span class="hero-3d-icon" style="--tilt:-3deg">📐</span>
+        <span class="hero-3d-icon" style="--tilt:7deg">🔨</span>
+      </div>
+      <div class="hero-stat-main">10<span style="font-size:2.5rem">h</span></div>
+      <div class="hero-stat-desc">
+        <strong>horas semanales</strong> que recupera un autónomo o jefe de obra al automatizar la gestión documental — da igual si llevas tú solo la obra o tienes equipo.
+      </div>
+    </div>
+    <div class="hero-right-pills">
+      <div class="hero-pill">
+        <div class="hero-pill-dot"></div>
+        Sin que tus subcontratas cambien nada
+      </div>
+      <div class="hero-pill">
+        <div class="hero-pill-dot"></div>
+        Pensado para 1-5 empleados
+      </div>
+      <div class="hero-pill">
+        <div class="hero-pill-dot"></div>
+        Sin software complejo ni consultoría pesada
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-bottom-stat">
+      <div class="hero-bottom-num">85%</div>
+      <div class="hero-bottom-label">Menos tiempo en CAE y subcontratas</div>
+    </div>
+    <div class="hero-bottom-stat">
+      <div class="hero-bottom-num">90%</div>
+      <div class="hero-bottom-label">Reducción en partes diarios</div>
+    </div>
+    <div class="hero-bottom-stat">
+      <div class="hero-bottom-num">75%</div>
+      <div class="hero-bottom-label">Ahorro en certificaciones</div>
+    </div>
+    <div class="hero-bottom-stat">
+      <div class="hero-bottom-num">+200</div>
+      <div class="hero-bottom-label">Obras pequeñas y medianas cubiertas</div>
+    </div>
+    <div class="hero-bottom-stat">
+      <div class="hero-bottom-num">30d</div>
+      <div class="hero-bottom-label">Garantía de resultado</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PAIN ══════════ -->
+<section id="pain">
+  <div class="pain-head">
+    <div class="pain-head-left">
+      <span class="label-text" style="color:rgba(255,255,255,0.35)">El problema</span>
+      <h2>¿Te suena<br><em>familiar?</em></h2>
+    </div>
+    <div class="pain-head-right">
+      <p style="color:rgba(255,255,255,0.5)">En una constructora pequeña, muchas veces de <strong>1 a 5 personas</strong>, el dueño lo hace todo: presupuesta, compra material, coordina subcontratas y responde al cliente. Gran parte de ese tiempo no está en obra: está en papel, WhatsApp y Excel.</p>
+    </div>
+  </div>
+  <div class="container audience-strip reveal">
+    <div class="audience-pill"><span class="mini-3d-icon">👷</span><span><strong>Autónomos</strong> que llevan obra y oficina a la vez</span></div>
+    <div class="audience-pill"><span class="mini-3d-icon">🧰</span><span><strong>Reformistas</strong> con 1-5 operarios</span></div>
+    <div class="audience-pill"><span class="mini-3d-icon">🏠</span><span><strong>Constructoras pequeñas</strong> y pymes hasta 50 empleados</span></div>
+  </div>
+  <div class="pain-grid reveal">
+    <div class="pain-card">
+      <div class="pain-num">01</div>
+      <span class="mini-3d-icon">📄</span>
+      <div class="pain-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      </div>
+      <h4>La subcontrata no manda los documentos</h4>
+      <p>Llevas tres días esperando el seguro de RC. Mientras, la obra parada y la inspección sin avisar de cuándo llega.</p>
+      <div class="pain-time">⏱ 12h/semana en CAE</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">02</div>
+      <span class="mini-3d-icon">📏</span>
+      <div class="pain-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <h4>La certificación mensual consume medio día</h4>
+      <p>Medir, pasar al Excel, generar el documento, mandar, corregir, volver a mandar. Y la factura esperando.</p>
+      <div class="pain-time">⏱ 6h por certificación</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">03</div>
+      <span class="mini-3d-icon">🦺</span>
+      <div class="pain-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h4>El PSS se actualiza con plantilla de Word antigua</h4>
+      <p>Nueva subcontrata = nueva revisión manual. Control de versiones inexistente. A veces lo hace la gestoría a 300€/vez.</p>
+      <div class="pain-time">⏱ 8h versión inicial</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">04</div>
+      <span class="mini-3d-icon">🧾</span>
+      <div class="pain-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <h4>Los partes de obra se hacen "de memoria"</h4>
+      <p>Papel que se moja, Excel incompleto, nadie consolida. Sin datos cuando llega una reclamación en periodo de garantía.</p>
+      <div class="pain-time">⏱ 45 min/día · sin sistematizar</div>
+    </div>
+  </div>
+  <div class="pain-risk">
+    <div class="pain-risk-inner reveal">
+      <div class="pain-risk-badge">⚠ Riesgo legal</div>
+      <p class="pain-risk-text">Una documentación de subcontratas incompleta durante una inspección ITSS puede costar entre <strong>6.251€ y 187.515€</strong> en sanciones. <strong>También afecta a obras pequeñas:</strong> si eres autónomo o una microconstructora, no tienes margen para perder una mañana buscando papeles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ RESULTS ══════════ -->
+<section id="results">
+  <div class="container">
+    <div class="results-intro reveal">
+      <div class="results-intro-left">
+        <span class="label-text">Resultados reales</span>
+        <h2 style="margin-top:1rem">Tiempo que<br>recuperas.<br><em>En números.</em></h2>
+      </div>
+      <div class="results-intro-right">
+        <p>Estos ahorros están pensados para negocios de obra donde cada hora pesa: <strong>autónomos, equipos de 1 a 5 empleados y pequeñas pymes constructoras</strong>. No necesitas un departamento de administración para que Obrafy tenga sentido.</p>
+      </div>
+    </div>
+    <div class="metrics-grid reveal">
+      <div class="metric-card">
+        <div class="metric-big"><span class="count-num" data-target="85">0</span><span class="metric-unit">%</span></div>
+        <div class="metric-label">Documentos · Subcontratas</div>
+        <div class="metric-arrow">
+          <span class="metric-from">12h / semana</span>
+          <span>→</span>
+          <span class="metric-to">menos de 2h</span>
+        </div>
+        <div class="metric-bg-num">85</div>
+      </div>
+      <div class="metric-card metric-card--accent">
+        <div class="metric-big"><span class="count-num" data-target="90">0</span><span class="metric-unit">%</span></div>
+        <div class="metric-label">Partes diarios de obra</div>
+        <div class="metric-arrow">
+          <span class="metric-from">45 min / día</span>
+          <span>→</span>
+          <span class="metric-to">5 minutos</span>
+        </div>
+        <div class="metric-bg-num">90</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-big"><span class="count-num" data-target="75">0</span><span class="metric-unit">%</span></div>
+        <div class="metric-label">Certificaciones mensuales</div>
+        <div class="metric-arrow">
+          <span class="metric-from">6h / certificación</span>
+          <span>→</span>
+          <span class="metric-to">1h 30min</span>
+        </div>
+        <div class="metric-bg-num">75</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-big"><span class="count-num" data-target="90">0</span><span class="metric-unit">%</span></div>
+        <div class="metric-label">Plan de Seguridad y Salud</div>
+        <div class="metric-arrow">
+          <span class="metric-from">8h inicial</span>
+          <span>→</span>
+          <span class="metric-to">45 minutos</span>
+        </div>
+        <div class="metric-bg-num">90</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-big"><span class="count-num" data-target="80">0</span><span class="metric-unit">%</span></div>
+        <div class="metric-label">Albaranes y acopios</div>
+        <div class="metric-arrow">
+          <span class="metric-from">45 min / día</span>
+          <span>→</span>
+          <span class="metric-to">10 minutos</span>
+        </div>
+        <div class="metric-bg-num">80</div>
+      </div>
+      <div class="metric-card metric-card--accent" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+        <div style="font-size:3rem;margin-bottom:0.5rem">⚖️</div>
+        <div class="metric-label" style="font-size:1rem;margin-bottom:0.75rem">Cobertura normativa</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:0.88rem;line-height:1.5">
+          Autónomos y microempresas<br>+ pymes de construcción<br>Normativa actualizada
+        </div>
+      </div>
+    </div>
+    <p class="results-note">Estimaciones orientadas a constructores autónomos, empresas de 1 a 5 empleados y pymes de construcción. Los resultados varían según volumen de obra y procesos actuales.</p>
+  </div>
+</section>
+
+<!-- ══════════ HOW ══════════ -->
+<section id="how">
+  <div class="container">
+    <div class="how-header reveal">
+      <span class="label-text">Sin complicaciones</span>
+      <h2>Tres pasos.<br>Primera semana <em>operativa.</em></h2>
+    </div>
+    <div class="how-steps reveal">
+      <div class="how-step">
+        <div class="how-step-num">01</div>
+        <h3>Identificamos dónde pierdes más tiempo</h3>
+        <p>En una llamada de 30 minutos mapeamos tus procesos actuales: obras activas, presupuestos, materiales, partes y documentos. <strong>Da igual si eres tú solo o un equipo de cinco:</strong> te decimos dónde recuperar horas primero.</p>
+        <div class="how-step-tag">30 min · sin compromiso</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">02</div>
+        <h3>Configuramos sin cambiar tu forma de trabajar</h3>
+        <p>No hay software pesado ni formación eterna. Nos integramos en el email, el WhatsApp y el móvil que ya usas. Si tienes equipo, no lo obligamos a aprender una herramienta nueva; si eres autónomo, te quitamos carga sin meterte más pantallas.</p>
+        <div class="how-step-tag">Primera semana operativa</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">03</div>
+        <h3>Resultados en las primeras dos semanas</h3>
+        <p>No en tres meses. En los primeros 15 días ya mides el tiempo que recuperas. Si no funciona para tu tipo de obra o tu tamaño de empresa, te lo decimos con precisión y no cobramos.</p>
+        <div class="how-step-tag">Resultados en ≤ 2 semanas</div>
+      </div>
+    </div>
+    <div class="guarantee reveal">
+      <div class="guarantee-check">✓</div>
+      <div class="guarantee-body">
+        <h4>Garantía de resultado de 30 días</h4>
+        <p>Si en 30 días no has recuperado al menos 5 horas semanales en los procesos acordados, te devolvemos el primer mes. <strong>Especialmente pensado para negocios pequeños, donde 5 horas cambian la semana.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CASES ══════════ -->
+<section id="cases">
+  <div class="container">
+    <div class="cases-head reveal">
+      <div>
+        <span class="label-text">Casos de uso</span>
+        <h2>Cuatro zonas críticas,<br><em>una sola capa de control.</em></h2>
+      </div>
+      <p>Del presupuesto inicial al cierre documental: Obrafy convierte tareas dispersas en flujos trazables, rápidos y medibles para <strong>autónomos, equipos pequeños y pymes</strong>.</p>
+    </div>
+    <div class="cases-tabs-row reveal">
+      <button class="cases-tab active" data-panel="presupuestos">1 · Presupuestos</button>
+      <button class="cases-tab" data-panel="personal">2 · Personal y materiales</button>
+      <button class="cases-tab" data-panel="partes">3 · Partes y control</button>
+      <button class="cases-tab" data-panel="subcontratas">4 · Subcontratas</button>
+    </div>
+    <div class="cases-body">
+
+      <div class="case-panel active" id="panel-presupuestos">
+        <div class="case-col case-col-before">
+          <div class="case-col-label">Ahora mismo</div>
+          <h3>A ojo, tarde y sin margen claro.</h3>
+          <ul class="case-list">
+            <li>Mides mentalmente o en papel, calculas en Excel sin precios actualizados</li>
+            <li>Pides precios a proveedores cada vez desde cero, por teléfono o WhatsApp</li>
+            <li>El presupuesto tarda 4-8 horas por obra mediana</li>
+            <li>No sabes si el precio que diste la última vez fue rentable</li>
+            <li>El cliente te presiona y mandas el número "a ojo" para no perder el trabajo</li>
+            <li>Nunca cruzas lo presupuestado con lo que costó realmente</li>
+          </ul>
+        </div>
+        <div class="case-col case-col-after">
+          <div class="case-col-label">Con Obrafy</div>
+          <h3>Precio justo, en tiempo, con margen controlado.</h3>
+          <ul class="case-list">
+            <li>Sube la memoria descriptiva, una foto o el plano y extraemos las unidades de obra automáticamente</li>
+            <li>Base de precios actualizada: BEDEC, PREOC y tus históricos de obra real</li>
+            <li>Presupuesto editable generado en menos de 30 minutos para obra mediana</li>
+            <li>Al cerrar la obra, cruzamos presupuesto vs. coste real para que sepas qué partidas se desvían</li>
+            <li>Análisis de rentabilidad por tipo de obra, por cliente y por zona</li>
+          </ul>
+        </div>
+        <div class="case-saving-bar">
+          <div class="label-block">
+            <span class="label-prefix">Antes</span>
+            <span class="label-from">6-8H POR PRESUPUESTO</span>
+          </div>
+          <span class="label-arrow">→</span>
+          <div class="saving-block">
+            <span class="saving-prefix">Con Obrafy</span>
+            <span class="saving">MENOS DE 1H</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-panel" id="panel-personal">
+        <div class="case-col case-col-before">
+          <div class="case-col-label">Ahora mismo</div>
+          <h3>No sabes cuánto cuesta cada obra hasta que ya ha terminado.</h3>
+          <ul class="case-list">
+            <li>El control de horas de cada operario va en papel o en Excel al final de la semana</li>
+            <li>Los albaranes llegan, se firman y acaban en una caja o en el salpicadero</li>
+            <li>No cruzas horas trabajadas con tareas ejecutadas ni con el planning</li>
+            <li>A fin de mes revisas facturas manualmente, sin saber si cuadran con lo recibido</li>
+            <li>El 3-5% de las facturas tiene errores que no detectas</li>
+            <li>No sabes en tiempo real si una obra está siendo rentable o está comiendo margen</li>
+          </ul>
+        </div>
+        <div class="case-col case-col-after">
+          <div class="case-col-label">Con Obrafy</div>
+          <h3>Costes reales en tiempo real. Sin esperar al final de la obra.</h3>
+          <ul class="case-list">
+            <li>El autónomo, encargado u operario ficha desde el móvil en 10 segundos: obra, tarea, horas</li>
+            <li>Foto del albarán, datos extraídos automáticamente y cruce con pedido emitido</li>
+            <li>Alerta inmediata si la factura del proveedor no cuadra con lo recibido</li>
+            <li>Dashboard de coste por obra actualizado cada día: mano de obra, materiales y subcontratas</li>
+            <li>Al mes siguiente ya sabes qué obra fue rentable y cuál no, y por qué</li>
+          </ul>
+        </div>
+        <div class="case-saving-bar">
+          <div class="label-block">
+            <span class="label-prefix">Antes</span>
+            <span class="label-from">SIN VISIBILIDAD REAL</span>
+          </div>
+          <span class="label-arrow">→</span>
+          <div class="saving-block">
+            <span class="saving-prefix">Con Obrafy</span>
+            <span class="saving">COSTES VISIBLES EN TIEMPO REAL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-panel" id="panel-partes">
+        <div class="case-col case-col-before">
+          <div class="case-col-label">Ahora mismo</div>
+          <h3>Lo que pasa en obra, se queda en obra. Y se olvida.</h3>
+          <ul class="case-list">
+            <li>El parte diario se hace en papel, de memoria al final del día, o no se hace</li>
+            <li>No hay registro fiable de quién estuvo, cuántas horas ni qué ejecutó</li>
+            <li>Las incidencias se comunican por WhatsApp y nadie las registra formalmente</li>
+            <li>Si hay una reclamación en garantía, no tienes nada con lo que defenderte</li>
+            <li>El planning existe en la cabeza del jefe de obra, no en un documento actualizado</li>
+            <li>No detectas desviaciones hasta que el retraso ya es un problema</li>
+          </ul>
+        </div>
+        <div class="case-col case-col-after">
+          <div class="case-col-label">Con Obrafy</div>
+          <h3>Trazabilidad total de la obra, sin papeleo extra.</h3>
+          <ul class="case-list">
+            <li>Tú o el encargado dictáis el parte en 3 minutos desde el móvil, en obra</li>
+            <li>Registramos quién estuvo, qué ejecutó, cuántas horas y qué incidencias hubo</li>
+            <li>Cruce automático con el planning y alerta si la obra se desvía del ritmo previsto</li>
+            <li>Cada incidencia queda registrada con fecha, responsable y resolución</li>
+            <li>Informe semanal de avance generado automáticamente para promotor o dirección facultativa</li>
+            <li>Historial completo disponible si hay reclamaciones en garantía</li>
+          </ul>
+        </div>
+        <div class="case-saving-bar">
+          <div class="label-block">
+            <span class="label-prefix">Antes</span>
+            <span class="label-from">45 MIN/DÍA · SIN REGISTRO</span>
+          </div>
+          <span class="label-arrow">→</span>
+          <div class="saving-block">
+            <span class="saving-prefix">Con Obrafy</span>
+            <span class="saving">5 MIN · TRAZABILIDAD TOTAL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-panel" id="panel-subcontratas">
+        <div class="case-col case-col-before">
+          <div class="case-col-label">Ahora mismo</div>
+          <h3>Entre coordinarlas y perseguirlas, se te va la mañana.</h3>
+          <ul class="case-list">
+            <li>Cada subcontrata nueva exige seguros, TC2, riesgos, aptitudes médicas y formación PRL</li>
+            <li>Todo llega por WhatsApp o email, en distintos formatos, sin orden</li>
+            <li>Los documentos caducan y no te enteras hasta que llega la inspección</li>
+            <li>El Plan de Seguridad y Salud se actualiza cada vez que entra una subcontrata: 1-2 horas</li>
+            <li>Si falta un documento y hay un accidente, la responsabilidad puede recaer sobre ti</li>
+            <li>La apertura del centro de trabajo ante la ITSS se retrasa porque nadie la gestiona a tiempo</li>
+          </ul>
+        </div>
+        <div class="case-col case-col-after">
+          <div class="case-col-label">Con Obrafy</div>
+          <h3>Cada subcontrata documentada, sin perseguir a nadie.</h3>
+          <ul class="case-list">
+            <li>La subcontrata manda documentos por donde quiera: WhatsApp, email, lo que sea</li>
+            <li>Validamos automáticamente tipo de documento, empresa, cobertura y fecha de vigencia</li>
+            <li>Alerta 30 días antes de cada caducidad, para ti y opcionalmente para la subcontrata</li>
+            <li>El PSS se actualiza automáticamente cuando entra una nueva subcontrata: 10 minutos, no 2 horas</li>
+            <li>Apertura de centro de trabajo gestionada con los datos que ya tienes, sin reintroducir nada</li>
+            <li>En una inspección: toda la documentación ordenada, completa y accesible en segundos</li>
+          </ul>
+        </div>
+        <div class="case-saving-bar">
+          <div class="label-block">
+            <span class="label-prefix">Antes</span>
+            <span class="label-from">12H / SEMANA PERSIGUIENDO DOCUMENTOS</span>
+          </div>
+          <span class="label-arrow">→</span>
+          <div class="saving-block">
+            <span class="saving-prefix">Con Obrafy</span>
+            <span class="saving">MENOS DE 2H / SEMANA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ COMPARE ══════════ -->
+<section id="compare">
+  <div class="container">
+    <div class="compare-head reveal">
+      <span class="label-text">Comparativa</span>
+      <h2>¿Por qué no<br>las otras <em>opciones?</em></h2>
+    </div>
+    <div style="overflow-x:auto" class="reveal">
+      <table class="compare-tbl">
+        <thead>
+          <tr>
+            <th>Criterio</th>
+            <th>Excel + WhatsApp</th>
+            <th>Ctaima / Dokify</th>
+                <th class="col-ours">Obrafy ✓</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tiempo de gestión semanal</td>
+            <td class="bad">12h/semana</td>
+            <td class="ok">5-8h/semana</td>
+            <td class="col-ours">Menos de 2h/semana</td>
+          </tr>
+          <tr>
+            <td>La subcontrata debe registrarse</td>
+            <td class="good">No</td>
+            <td class="bad">Sí (y no lo hacen)</td>
+            <td class="col-ours">No</td>
+          </tr>
+          <tr>
+            <td>Alertas de caducidad de documentos</td>
+            <td class="bad">No</td>
+            <td class="ok">Parcial</td>
+            <td class="col-ours">Sí · 30 días antes</td>
+          </tr>
+          <tr>
+            <td>Genera documentos (PSS, partes)</td>
+            <td class="bad">No</td>
+            <td class="bad">No</td>
+            <td class="col-ours">Sí</td>
+          </tr>
+          <tr>
+            <td>Funciona con WhatsApp y email actuales</td>
+            <td class="good">Sí</td>
+            <td class="bad">No</td>
+            <td class="col-ours">Sí</td>
+          </tr>
+          <tr>
+            <td>Normativa por CCAA y municipio</td>
+            <td class="bad">No</td>
+            <td class="ok">Parcial</td>
+            <td class="col-ours">+200 municipios</td>
+          </tr>
+          <tr>
+            <td>Tiempo hasta puesta en marcha</td>
+            <td class="good">Inmediato</td>
+            <td class="bad">Semanas + formación</td>
+            <td class="col-ours">Primera semana</td>
+          </tr>
+          <tr>
+            <td>Precio mensual</td>
+            <td class="ok">0€ + tu tiempo</td>
+            <td class="bad">150-400€/mes</td>
+            <td class="col-ours">Desde 149€/mes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid reveal">
+      <div class="about-left">
+        <span class="label-text">Quiénes somos</span>
+        <h2>Construido desde<br><em>dentro</em> del sector.</h2>
+        <p>Llegamos al sector de la construcción después de ver de primera mano cómo el papeleo consume tiempo de obra en <strong>autónomos, empresas familiares y constructoras muy pequeñas</strong> en toda España.</p>
+        <p>No somos una consultora generalista que ha adaptado una solución genérica para empresas grandes. Mapeamos requisitos documentales y procesos reales para que Obrafy encaje también cuando no hay oficina técnica ni administrativo interno.</p>
+        <div class="about-facts">
+          <div class="about-fact">
+            <span class="about-fact-icon">🗺️</span>
+            <span><strong>+200 municipios</strong> con normativa específica mapeada. Cualquier CCAA cubierta.</span>
+          </div>
+          <div class="about-fact">
+            <span class="about-fact-icon">⚖️</span>
+            <span>Normativa actualizada: <strong>RD 1627/1997</strong>, Ley 54/2003, RD 171/2004 y regulaciones autonómicas.</span>
+          </div>
+          <div class="about-fact">
+            <span class="about-fact-icon">📱</span>
+            <span>Diseñado para quien está en obra y en la oficina a la vez: <strong>móvil, WhatsApp y email</strong>. Sin apps nuevas que aprender.</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-right">
+        <div class="about-card-name">Alejandro E.</div>
+        <div class="about-card-role">Fundador · Consultor de Automatización</div>
+        <p class="about-quote">"Después de ver cómo un constructor de una empresa familiar perdía tres tardes a la semana con documentos, presupuestos y albaranes, decidí que había una forma mejor de hacer las cosas. Sin tecnología por la tecnología: por el tiempo que devuelve."</p>
+        <div class="about-stats-row">
+          <div class="about-stat-cell">
+            <div class="about-stat-num">+50</div>
+            <div class="about-stat-lbl">Autónomos y pymes asesoradas</div>
+          </div>
+          <div class="about-stat-cell">
+            <div class="about-stat-num">+200</div>
+            <div class="about-stat-lbl">Municipios mapeados</div>
+          </div>
+          <div class="about-stat-cell">
+            <div class="about-stat-num">17</div>
+            <div class="about-stat-lbl">CCAA cubiertas</div>
+          </div>
+          <div class="about-stat-cell">
+            <div class="about-stat-num">30d</div>
+            <div class="about-stat-lbl">Garantía</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TESTIMONIALS ══════════ -->
+<section id="testimonials">
+  <div class="container">
+    <div class="testi-head reveal">
+      <span class="label-text">Testimonios</span>
+      <h2>Lo dicen quienes<br>lo <em>usan.</em></h2>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Somos cuatro en la empresa y no tenemos administrativo. Pasamos de dedicar <strong>10 horas semanales</strong> a documentos y albaranes a menos de dos."</p>
+        <div class="testi-sep"></div>
+        <div class="testi-person">
+          <div class="testi-avatar">JM</div>
+          <div>
+            <div class="testi-name">José Manuel R.</div>
+            <div class="testi-co">Autónomo con equipo · Reformas Roca · Tarragona</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Tuvimos una inspección de la ITSS tres semanas después de empezar. <strong>Por primera vez teníamos toda la documentación en orden</strong> sin haber pasado la tarde anterior buscando papeles."</p>
+        <div class="testi-sep"></div>
+        <div class="testi-person">
+          <div class="testi-avatar">MP</div>
+          <div>
+            <div class="testi-name">María Pilar S.</div>
+            <div class="testi-co">Constructora familiar · Barcelona</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Antes hacía presupuestos de noche, cuando terminaba la obra. Ahora saco una primera versión rápido y veo si hay margen. <strong>Eso en una empresa pequeña se nota mucho.</strong>"</p>
+        <div class="testi-sep"></div>
+        <div class="testi-person">
+          <div class="testi-avatar">FG</div>
+          <div>
+            <div class="testi-name">Francisco G.</div>
+            <div class="testi-co">Albañilería y reformas · Zaragoza</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FAQ ══════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-head reveal">
+      <span class="label-text">Preguntas frecuentes</span>
+      <h2>Lo que suelen<br><em>preguntarnos.</em></h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q">
+          Soy autónomo o somos 2-5 personas. ¿Obrafy es demasiado para nosotros?
+          <div class="faq-caret">+</div>
+        </div>
+        <div class="faq-a">
+          <p><strong>No. Ese es precisamente el perfil ideal.</strong> Obrafy está pensado para constructores autónomos, equipos pequeños y empresas familiares donde la misma persona presupuesta, compra materiales, coordina la obra y gestiona papeles. Si tienes 1 a 5 empleados, queremos quitarte carga, no meterte una plataforma corporativa.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          ¿Los documentos que genera tienen validez legal?
+          <div class="faq-caret">+</div>
+        </div>
+        <div class="faq-a">
+          <p>Los documentos se ajustan a la normativa vigente (RD 1627/1997 para el PSS, Ley 54/2003 y RD 171/2004 para la CAE, y normativa autonómica específica). <strong>Siempre generamos una versión editable que tú revisas y firmas</strong> antes de que tenga efecto. Actuamos como copiloto: la responsabilidad y validez legal recae en quien firma, igual que si lo hubiera redactado un gestor externo.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          ¿Mis subcontratas tienen que instalar algo o registrarse?
+          <div class="faq-caret">+</div>
+        </div>
+        <div class="faq-a">
+          <p><strong>No. Absolutamente nada.</strong> Tus subcontratas siguen mandando documentos exactamente como lo hacen ahora: por WhatsApp, por email o como prefieran. Nosotros procesamos todo desde nuestro lado. Esta es la diferencia clave con plataformas como Ctaima o Dokify, que requieren registro activo de la subcontrata. Las subcontratas pequeñas no lo hacen, y el sistema falla por eso.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          ¿Funciona en cualquier comunidad autónoma y municipio?
+          <div class="faq-caret">+</div>
+        </div>
+        <div class="faq-a">
+          <p>Sí. Tenemos mapeada la normativa específica de las 17 comunidades autónomas y más de 200 municipios. <strong>Si tu obra está en un municipio con normativa particular, nos adaptamos.</strong> En la llamada inicial te confirmamos la cobertura exacta para tu zona de trabajo.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          Ya probé software de gestión y no funcionó. ¿Por qué va a ser diferente?
+          <div class="faq-caret">+</div>
+        </div>
+        <div class="faq-a">
+          <p>La mayoría de software falla porque <strong>parece pensado para empresas grandes</strong> y exige cambiar la forma de trabajar. Nosotros hacemos lo contrario: nos adaptamos a lo que ya usas (móvil, WhatsApp, email) y procesamos desde nuestro lado. Y si en 30 días no ves el ahorro prometido, te devolvemos el primer mes.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          ¿Cuánto tiempo lleva la puesta en marcha?
+          <div class="faq-caret">+</div>
+        </div>
+        <div class="faq-a">
+          <p><strong>Primera semana operativa</strong> para los procesos principales. No hay formación de equipo porque no cambiamos la forma de trabajar. La puesta en marcha requiere una sesión de 30-60 minutos contigo para entender tus procesos, aunque seas autónomo y no tengas estructura administrativa.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          ¿Cuánto cuesta?
+          <div class="faq-caret">+</div>
+        </div>
+        <div class="faq-a">
+          <p>Desde <strong>149€/mes</strong>, sin costes de implementación ni contratos anuales obligatorios. Está pensado para que tenga sentido incluso en empresas muy pequeñas: si eres autónomo o tienes 1-5 empleados, <strong>en la primera llamada calculamos exactamente cuánto tiempo recuperarías</strong> y si el ROI te compensa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-split reveal">
+      <div class="contact-left">
+        <span class="label-text">Empieza hoy</span>
+        <h2>¿Cuántas horas<br>puedes <em>recuperar?</em></h2>
+        <p>Cuéntanos cómo gestionas el papeleo de obra hoy y te decimos exactamente dónde y cuánto puedes ahorrar. <strong>Ideal si eres autónomo, empresa familiar o constructora de 1 a 5 empleados.</strong> Una conversación de 20 minutos. Sin comerciales, sin demo de 45 minutos.</p>
+        <div class="contact-trust-list">
+          <div class="contact-trust-item">
+            <div class="trust-dot"></div>
+            Respuesta en menos de 24 horas en horario laboral
+          </div>
+          <div class="contact-trust-item">
+            <div class="trust-dot"></div>
+            Sin compromiso: si por tamaño o tipo de obra no encaja, te lo decimos
+          </div>
+          <div class="contact-trust-item">
+            <div class="trust-dot"></div>
+            Garantía de devolución 30 días sin preguntas
+          </div>
+          <div class="contact-trust-item">
+            <div class="trust-dot"></div>
+            O llámanos directamente: 691 907 292
+          </div>
+        </div>
+      </div>
+      <div class="contact-right">
+        <h3>Cuéntanos<br>tu situación</h3>
+        <p class="sub">Te calculamos cuánto tiempo puedes recuperar, aunque seas una empresa muy pequeña.</p>
+        <div id="formWrap">
+          <div class="form-group">
+            <label for="nombre2">Tu nombre</label>
+            <input type="text" id="nombre2" placeholder="Pedro García">
+          </div>
+          <div class="form-group">
+            <label for="empresa2">Empresa, tamaño y teléfono</label>
+            <input type="text" id="empresa2" placeholder="Autónomo / 3 empleados · 612 345 678">
+          </div>
+          <div class="form-group">
+            <label for="pain2">Proceso que más tiempo te quita</label>
+            <select id="pain2">
+              <option value="">Selecciona el principal problema</option>
+              <option>Presupuestos</option>
+              <option>Control de personal y materiales</option>
+              <option>Partes y control de obra</option>
+              <option>Subcontratas</option>
+              <option>Todo lo anterior</option>
+            </select>
+          </div>
+          <a href="#" class="btn btn-yellow form-submit" onclick="sendForm(event)">Enviar — os llamo en 24h →</a>
+          <p class="form-note">Sin spam ni comerciales. Solo una conversación real sobre tu situación.</p>
+        </div>
+        <div id="successMsg" style="display:none;text-align:center;padding:2rem 0;">
+          <div style="font-size:2.5rem;margin-bottom:1rem">✅</div>
+          <h4 style="color:var(--olive);margin-bottom:0.5rem">Mensaje recibido</h4>
+          <p style="color:var(--muted);font-size:0.9rem">Te contactamos en menos de 24 horas en horario laboral. Prepara 20 minutos para contarnos cómo funciona el papeleo en tu empresa o como autónomo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <div class="footer-logo">OBRA<em>FY</em></div>
+      <div class="footer-links">
+        <a href="#pain">El problema</a>
+        <a href="#results">Resultados</a>
+        <a href="#how">Cómo funciona</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contacto</a>
+      </div>
+      <div class="footer-copy">© 2025 Obrafy · Todos los derechos reservados</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Scroll reveal
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ── Count up
+function countUp(el, target, dur = 1500) {
+  let n = 0, step = target / (dur / 16);
+  const t = setInterval(() => {
+    n = Math.min(n + step, target);
+    el.textContent = Math.floor(n);
+    if (n >= target) clearInterval(t);
+  }, 16);
+}
+const metricObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.count-num').forEach(el => countUp(el, +el.dataset.target));
+      metricObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.25 });
+const rs = document.getElementById('results');
+if (rs) metricObs.observe(rs);
+
+// ── Case tabs
+document.querySelectorAll('.cases-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const p = btn.dataset.panel;
+    document.querySelectorAll('.cases-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.case-panel').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + p).classList.add('active');
+  });
+});
+
+// ── FAQ
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!open) item.classList.add('open');
+  });
+});
+
+// ── Form
+function sendForm(e) {
+  e.preventDefault();
+  const nombre  = document.getElementById('nombre2').value.trim();
+  const empresa = document.getElementById('empresa2').value.trim();
+  const pain    = document.getElementById('pain2').value;
+
+  if (!nombre || !empresa) {
+    if (!nombre)  document.getElementById('nombre2').style.borderColor  = 'var(--rust)';
+    if (!empresa) document.getElementById('empresa2').style.borderColor = 'var(--rust)';
+    return;
+  }
+
+  const asunto = encodeURIComponent('Solicitud de información — Obrafy');
+  const cuerpo = encodeURIComponent(
+    'Hola,\n\n' +
+    'Me llamo ' + nombre + ' y os contacto desde ' + empresa + '.\n\n' +
+    'El proceso que más tiempo me quita actualmente es:\n' +
+    (pain || 'No especificado') + '\n\n' +
+    'Me gustaría saber cuánto tiempo puedo recuperar con Obrafy.\n\n' +
+    'Podéis contactarme en este email o en el teléfono que os indicaré cuando me respondáis.\n\n' +
+    'Gracias.'
+  );
+
+  window.location.href = 'mailto:obrafyagencia@gmail.com?subject=' + asunto + '&body=' + cuerpo;
+
+  // Mostrar confirmación tras un momento
+  setTimeout(() => {
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  }, 800);
+}
+
+// ── Nav active
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  navLinks.forEach(a => {
+    const isActive = a.getAttribute('href') === '#' + cur;
+    a.style.borderBottomColor = isActive ? 'var(--olive)' : 'transparent';
+    a.style.color = isActive ? 'var(--ink)' : '';
+  });
+});
+</script>
+</body>
+</html>
