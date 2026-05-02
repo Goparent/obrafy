@@ -762,6 +762,43 @@ nav {
   border: 0;
   background: white;
 }
+.budget-modal-body {
+  position: relative;
+  flex: 1;
+  background: white;
+}
+.budget-modal-frame {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+.budget-modal-fallback {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-items: center;
+  padding: 2rem;
+  text-align: center;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(49,208,155,0.18), transparent 18rem),
+    linear-gradient(135deg, #fbfeff, #eef7f5);
+  color: var(--ink-soft);
+}
+.budget-modal-fallback.visible { display: grid; }
+.budget-modal-fallback h3 {
+  color: var(--ink);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  line-height: 1.05;
+  margin-bottom: 0.65rem;
+}
+.budget-modal-fallback p {
+  max-width: 520px;
+  margin: 0 auto 1rem;
+}
+.budget-modal-fallback a {
+  color: var(--ink);
+}
 
 footer { padding: 2.2rem 0; color: rgba(255,255,255,0.7); }
 .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; flex-wrap: wrap; }
@@ -1644,7 +1681,16 @@ footer { padding: 2.2rem 0; color: rgba(255,255,255,0.7); }
       </div>
       <button class="budget-modal-close" type="button" aria-label="Cerrar presupuesto ejemplo">×</button>
     </div>
-    <iframe class="budget-modal-frame" title="Presupuesto ejemplo Obrafy" src="file:///Users/alejandro/Downloads/presupuesto-obrafy.html"></iframe>
+    <div class="budget-modal-body">
+      <iframe class="budget-modal-frame" title="Presupuesto ejemplo Obrafy" data-src="presupuesto-obrafy.html"></iframe>
+      <div class="budget-modal-fallback" id="budgetModalFallback">
+        <div>
+          <h3>No se ha podido cargar el presupuesto</h3>
+          <p>Comprueba que <strong>presupuesto-obrafy.html</strong> esté subido junto a esta página en el mismo directorio del despliegue.</p>
+          <a class="btn btn-demo" href="presupuesto-obrafy.html" target="_blank" rel="noopener">Abrir presupuesto ejemplo</a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1716,10 +1762,16 @@ document.querySelectorAll('.faq-q').forEach(q => {
 // ── Budget demo modal
 const budgetModal = document.getElementById('budgetModal');
 const budgetClose = budgetModal?.querySelector('.budget-modal-close');
+const budgetFrame = budgetModal?.querySelector('.budget-modal-frame');
+const budgetFallback = document.getElementById('budgetModalFallback');
 const budgetButtons = document.querySelectorAll('.js-budget-demo');
 
 function openBudgetModal() {
   if (!budgetModal) return;
+  if (budgetFallback) budgetFallback.classList.remove('visible');
+  if (budgetFrame && !budgetFrame.getAttribute('src')) {
+    budgetFrame.setAttribute('src', new URL(budgetFrame.dataset.src || 'presupuesto-obrafy.html', window.location.href).href);
+  }
   budgetModal.classList.add('open');
   budgetModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
@@ -1734,6 +1786,19 @@ function closeBudgetModal() {
 
 budgetButtons.forEach(btn => btn.addEventListener('click', openBudgetModal));
 budgetClose?.addEventListener('click', closeBudgetModal);
+budgetFrame?.addEventListener('load', () => {
+  try {
+    const frameDoc = budgetFrame.contentDocument || budgetFrame.contentWindow?.document;
+    const bodyText = frameDoc?.body?.innerText?.trim() || '';
+    const title = frameDoc?.title || '';
+    if (!bodyText && !title) budgetFallback?.classList.add('visible');
+  } catch (err) {
+    budgetFallback?.classList.remove('visible');
+  }
+});
+budgetFrame?.addEventListener('error', () => {
+  budgetFallback?.classList.add('visible');
+});
 budgetModal?.addEventListener('click', (e) => {
   if (e.target === budgetModal) closeBudgetModal();
 });
