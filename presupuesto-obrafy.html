@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presupuesto de Obra — Reforma Integral Piso Centro · Obrafy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════
+   DESIGN TOKENS — Obrafy glass theme
+═══════════════════════════════════════ */
+:root {
+  --bg:        #f7fbff;
+  --surface:   rgba(255,255,255,0.64);
+  --surface-s: rgba(255,255,255,0.84);
+  --ink:       #13211f;
+  --ink-soft:  #4c5c59;
+  --muted:     #71807d;
+  --line:      rgba(19,33,31,0.11);
+  --line-s:    rgba(19,33,31,0.18);
+  --mint:      #31d09b;
+  --lime:      #a6e635;
+  --blue:      #3b82f6;
+  --cyan:      #16c4d8;
+  --amber:     #f7c84b;
+  --coral:     #ff6f61;
+  --olive:     #0b8b66;
+  --white:     #fff;
+  --shadow:    0 24px 70px rgba(28,76,91,0.13);
+  --shadow-sm: 0 8px 28px rgba(28,76,91,0.09);
+  --r:   20px;
+  --r-sm:12px;
+  --blur: blur(26px) saturate(155%);
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(49,208,155,.28),transparent 31rem),
+    radial-gradient(circle at 90% 8%,rgba(59,130,246,.22),transparent 28rem),
+    linear-gradient(135deg,#fbfeff 0%,#f3fbf8 42%,#eef6ff 100%);
+  color:var(--ink);
+  line-height:1.55;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+body::before,body::after{
+  content:'';
+  position:fixed;
+  width:34rem;height:34rem;
+  border-radius:46% 54% 68% 32%/38% 50% 50% 62%;
+  filter:blur(26px);
+  opacity:.38;
+  pointer-events:none;
+  z-index:0;
+  animation:liquidDrift 18s ease-in-out infinite alternate;
+}
+body::before{left:-12rem;top:22vh;background:linear-gradient(135deg,var(--cyan),var(--mint))}
+body::after{right:-12rem;bottom:8vh;background:linear-gradient(135deg,#8b7cf6,var(--amber));animation-delay:-7s}
+@keyframes liquidDrift{
+  0%{transform:translate3d(0,0,0) rotate(0deg) scale(1);border-radius:46% 54% 68% 32%/38% 50% 50% 62%}
+  100%{transform:translate3d(4rem,-3rem,0) rotate(14deg) scale(1.08);border-radius:62% 38% 44% 56%/55% 40% 60% 45%}
+}
+a{text-decoration:none;color:inherit}
+
+/* Fonts */
+.font-serif{font-family:'Playfair Display',serif}
+.font-block{font-family:'Bebas Neue',sans-serif}
+.label-text{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-size:.72rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);
+}
+.label-text::before{
+  content:'';width:.5rem;height:.5rem;border-radius:999px;
+  background:linear-gradient(135deg,var(--mint),var(--blue));
+  box-shadow:0 0 18px rgba(49,208,155,.55);
+}
+
+/* Glass card */
+.glass{
+  background:var(--surface);
+  border:1px solid rgba(255,255,255,.7);
+  border-radius:var(--r);
+  box-shadow:var(--shadow);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+}
+.glass-sm{
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(255,255,255,.6);
+  border-radius:var(--r-sm);
+  box-shadow:var(--shadow-sm);
+  backdrop-filter:blur(18px) saturate(145%);
+}
+
+/* ═══════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════ */
+.page-wrap{max-width:1240px;margin:0 auto;padding:2rem 2rem 3rem;position:relative;z-index:2}
+section{padding:6.5rem 0;position:relative}
+
+/* ═══════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  min-height:42px;padding:.75rem 1.4rem;
+  border-radius:999px;
+  font-family:'DM Sans',sans-serif;font-weight:800;font-size:.88rem;
+  cursor:pointer;border:1px solid rgba(255,255,255,.55);
+  transition:transform .22s ease,box-shadow .22s ease,background .22s ease;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(28,76,91,.18)}
+.btn-primary{
+  color:#071714;
+  background:linear-gradient(135deg,var(--lime),var(--mint) 45%,var(--cyan));
+  box-shadow:0 14px 30px rgba(49,208,155,.28);
+}
+.btn-outline{
+  background:rgba(255,255,255,.58);color:var(--ink);
+  border-color:rgba(19,33,31,.12);
+  backdrop-filter:blur(18px);
+}
+
+/* ═══════════════════════════════════════
+   HEADER / NAV
+═══════════════════════════════════════ */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(247,251,255,.72);
+  border-bottom:1px solid rgba(19,33,31,.08);
+  backdrop-filter:blur(22px) saturate(150%);
+  -webkit-backdrop-filter:blur(22px) saturate(150%);
+}
+.header-inner{
+  max-width:1240px;margin:0 auto;padding:0 2rem;
+  height:68px;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:.04em;color:var(--ink);
+  display:flex;align-items:center;gap:.5rem;
+}
+.nav-logo em{color:var(--mint);font-style:normal}
+.nav-logo svg{color:var(--mint)}
+.header-badge{
+  display:inline-flex;align-items:center;gap:.45rem;
+  padding:.3rem .85rem;border-radius:999px;
+  background:rgba(49,208,155,.12);border:1px solid rgba(49,208,155,.3);
+  font-size:.72rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--olive);
+}
+.header-badge::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--mint);box-shadow:0 0 12px rgba(49,208,155,.9);
+}
+.header-actions{display:flex;gap:.6rem;align-items:center}
+
+/* ═══════════════════════════════════════
+   HERO CARD
+═══════════════════════════════════════ */
+.hero-card{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:2rem;align-items:start;
+  padding:2.5rem 2.8rem;
+  margin-bottom:1.5rem;
+  position:relative;overflow:hidden;
+}
+.hero-card::before{
+  content:'';
+  position:absolute;inset:1rem;
+  border-radius:calc(var(--r) - 8px);
+  background:
+    radial-gradient(circle at 18% 22%,rgba(166,230,53,.3),transparent 13rem),
+    radial-gradient(circle at 88% 68%,rgba(22,196,216,.18),transparent 16rem);
+  pointer-events:none;
+}
+.hero-watermark{
+  position:absolute;right:-1rem;bottom:-3rem;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(10rem,20vw,18rem);line-height:1;
+  color:rgba(19,33,31,.04);pointer-events:none;user-select:none;
+}
+.presupuesto-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(49,208,155,.14);color:var(--olive);
+  border:1px solid rgba(49,208,155,.28);
+  font-size:.7rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;
+  padding:.32rem .9rem;border-radius:999px;margin-bottom:.9rem;
+}
+.presupuesto-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--mint)}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.7rem,3.5vw,2.8rem);
+  font-weight:900;line-height:1.08;letter-spacing:-.02em;
+  margin-bottom:.5rem;
+}
+.hero-sub{color:var(--ink-soft);font-size:.9rem}
+.meta-grid{
+  display:grid;grid-template-columns:repeat(3,auto);
+  gap:1.5rem 2rem;
+  margin-top:1.5rem;padding-top:1.5rem;
+  border-top:1px solid var(--line);
+}
+.meta-item label{
+  display:block;font-size:.68rem;font-weight:700;
+  color:var(--muted);letter-spacing:.07em;text-transform:uppercase;margin-bottom:.25rem;
+}
+.meta-item span{font-size:.88rem;font-weight:500;color:var(--ink)}
+.chip{
+  display:inline-block;font-size:.68rem;font-weight:800;
+  padding:.24rem .65rem;border-radius:999px;letter-spacing:.04em;
+}
+.chip-orange{background:rgba(247,200,75,.2);color:#92600a}
+.chip-green{background:rgba(49,208,155,.16);color:var(--olive)}
+.chip-blue{background:rgba(59,130,246,.12);color:#1e40af}
+
+/* Total box */
+.total-box{
+  position:relative;z-index:1;
+  background:linear-gradient(135deg,var(--ink) 0%,#0e4b4e 60%,#16726b 100%);
+  color:white;border-radius:var(--r-sm);
+  padding:1.75rem 2rem;text-align:right;
+  min-width:210px;
+  box-shadow:0 20px 50px rgba(19,33,31,.35);
+}
+.total-box::before{
+  content:'';position:absolute;inset:-30%;
+  background:conic-gradient(from 140deg at 48% 45%,rgba(22,196,216,.05),rgba(49,208,155,.35),rgba(166,230,53,.28),rgba(22,196,216,.05));
+  animation:liquidSpin 16s linear infinite;border-radius:50%;
+}
+@keyframes liquidSpin{to{transform:rotate(360deg)}}
+.total-box .t-label{position:relative;z-index:1;font-size:.68rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;opacity:.75;margin-bottom:.5rem}
+.total-box .t-amount{position:relative;z-index:1;font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,3.2rem);letter-spacing:-.02em;line-height:1;color:var(--lime)}
+.total-box .t-iva{position:relative;z-index:1;font-size:.75rem;opacity:.65;margin-top:.35rem}
+.total-box .t-ref{position:relative;z-index:1;font-size:.65rem;opacity:.45;margin-top:.75rem;letter-spacing:.06em;text-transform:uppercase}
+
+/* ═══════════════════════════════════════
+   PILLAR CARDS
+═══════════════════════════════════════ */
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-bottom:1.5rem}
+.pillar{padding:1.5rem 1.6rem;transition:transform .22s ease,box-shadow .22s ease}
+.pillar:hover{transform:translateY(-3px);box-shadow:0 28px 64px rgba(28,76,91,.14)}
+.p-icon-wrap{
+  width:40px;height:40px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:.85rem;font-size:1.1rem;
+  background:rgba(49,208,155,.12);border:1px solid rgba(49,208,155,.22);
+}
+.p-label{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
+.p-value{font-family:'Bebas Neue',sans-serif;font-size:1.85rem;letter-spacing:-.01em;color:var(--ink);line-height:1}
+.p-sub{font-size:.76rem;color:var(--muted);margin-top:.2rem}
+.pillar.accent{
+  background:linear-gradient(135deg,rgba(49,208,155,.16),rgba(22,196,216,.1));
+  border-color:rgba(49,208,155,.3);
+}
+.pillar.accent .p-value{color:var(--olive)}
+
+/* ═══════════════════════════════════════
+   TABS
+═══════════════════════════════════════ */
+.tabs-wrap{overflow:hidden;margin-bottom:1.5rem}
+.tabs-header{
+  display:flex;overflow-x:auto;scrollbar-width:none;
+  background:rgba(255,255,255,.42);
+  border-bottom:1px solid var(--line);
+  padding:.4rem .6rem 0;gap:.3rem;
+}
+.tabs-header::-webkit-scrollbar{display:none}
+.tab-btn{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.75rem 1.1rem;
+  font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;
+  color:var(--muted);border:none;
+  background:transparent;cursor:pointer;
+  white-space:nowrap;border-radius:12px 12px 0 0;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:all .2s;
+}
+.tab-btn:hover{color:var(--olive);background:rgba(49,208,155,.1)}
+.tab-btn.active{color:var(--olive);background:rgba(255,255,255,.85);border-bottom-color:var(--mint);font-weight:800}
+.tab-badge{
+  font-size:.65rem;font-weight:800;padding:.15rem .5rem;border-radius:999px;
+  background:var(--line);color:var(--muted);
+}
+.tab-btn.active .tab-badge{background:rgba(49,208,155,.18);color:var(--olive)}
+
+/* ═══════════════════════════════════════
+   PANELS
+═══════════════════════════════════════ */
+.tab-panel{display:none;padding:2rem 2.2rem}
+.tab-panel.active{display:block}
+
+.panel-header{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:1.5rem;
+  margin-bottom:1.5rem;
+  padding-bottom:1.25rem;
+  border-bottom:1px solid var(--line);
+}
+.panel-icon-wrap{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;
+  background:rgba(49,208,155,.12);border:1px solid rgba(49,208,155,.2);
+  margin-bottom:.65rem;
+}
+.panel-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.35rem;font-weight:800;letter-spacing:-.015em;margin-bottom:.2rem;
+}
+.panel-desc{font-size:.82rem;color:var(--muted)}
+.panel-subtotal{text-align:right;flex-shrink:0}
+.st-label{font-size:.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.3rem}
+.st-amount{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:-.01em;color:var(--olive);line-height:1}
+
+/* ═══════════════════════════════════════
+   TABLE
+═══════════════════════════════════════ */
+.obra-table{width:100%;border-collapse:collapse;font-size:.87rem}
+.obra-table thead th{
+  text-align:left;font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);padding:.65rem 1rem;
+  background:rgba(49,208,155,.07);border-bottom:1px solid rgba(49,208,155,.2);
+}
+.obra-table thead th:last-child,.obra-table thead th:nth-child(3),.obra-table thead th:nth-child(4){text-align:right}
+.obra-table tbody tr{border-bottom:1px solid var(--line);transition:background .15s}
+.obra-table tbody tr:hover{background:rgba(49,208,155,.07)}
+.obra-table tbody tr:last-child{border-bottom:none}
+.obra-table td{padding:.85rem 1rem;vertical-align:top}
+.obra-table td:nth-child(3),.obra-table td:nth-child(4){text-align:right;color:var(--ink-soft)}
+.obra-table td:last-child{text-align:right;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--ink);letter-spacing:.02em}
+.td-desc{font-weight:600;color:var(--ink)}
+.td-note{font-size:.76rem;color:var(--muted);margin-top:.2rem;line-height:1.45}
+.unidad-chip{
+  display:inline-block;font-size:.68rem;font-weight:700;
+  padding:.18rem .55rem;border-radius:6px;
+  background:rgba(59,130,246,.1);color:var(--blue);
+  letter-spacing:.04em;
+}
+
+/* Table footer */
+.table-footer{
+  display:flex;justify-content:flex-end;align-items:center;gap:1rem;
+  padding:1rem 1rem 0;margin-top:.5rem;
+  border-top:2px solid var(--line);
+}
+.footer-total{
+  font-family:'Bebas Neue',sans-serif;font-size:1.2rem;
+  color:var(--olive);letter-spacing:.03em;
+}
+
+/* ═══════════════════════════════════════
+   NOTA STRIP
+═══════════════════════════════════════ */
+.nota-strip{
+  display:flex;gap:.75rem;margin-top:1.25rem;
+  padding:1rem 1.2rem;border-radius:var(--r-sm);
+  background:rgba(247,200,75,.12);
+  border:1px solid rgba(247,200,75,.35);
+}
+.nota-strip .nota-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
+.nota-strip p{font-size:.8rem;color:#7a5800;line-height:1.55}
+.nota-strip.nota-green{background:rgba(49,208,155,.1);border-color:rgba(49,208,155,.3)}
+.nota-strip.nota-green p{color:var(--olive)}
+
+/* ═══════════════════════════════════════
+   GLOBAL FOOTER
+═══════════════════════════════════════ */
+.global-footer{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:1.5rem;padding:2.2rem 2.5rem;
+}
+.gf-section h4{
+  font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:.08em;
+  color:var(--muted);margin-bottom:.85rem;
+  display:flex;align-items:center;gap:.4rem;
+}
+.gf-section h4::before{
+  content:'';width:4px;height:14px;border-radius:999px;
+  background:linear-gradient(180deg,var(--mint),var(--blue));
+}
+.gf-section li,.gf-section p{font-size:.84rem;color:var(--ink-soft);line-height:1.7}
+.gf-section ul{list-style:none}
+.gf-section ul li{display:flex;align-items:baseline;gap:.35rem}
+.gf-section ul li::before{content:'→';color:var(--mint);font-weight:900;flex-shrink:0}
+
+/* Resumen final box */
+.resumen-final{
+  background:linear-gradient(135deg,var(--ink) 0%,#0e4b4e 60%,#16726b 100%);
+  border-radius:var(--r-sm);padding:1.4rem 1.6rem;
+  box-shadow:0 16px 40px rgba(19,33,31,.3);
+}
+.rf-row{display:flex;justify-content:space-between;font-size:.84rem;padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.72)}
+.rf-row:last-child{border-bottom:none}
+.rf-row.total-row{
+  font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.02em;
+  color:var(--lime);padding-top:.75rem;margin-top:.3rem;
+}
+
+/* ═══════════════════════════════════════
+   SECTION DIVIDER
+═══════════════════════════════════════ */
+.section-sep{
+  font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--muted);padding:.55rem 1rem .3rem;
+  background:rgba(49,208,155,.06);border-bottom:1px solid var(--line);
+}
+
+/* ═══════════════════════════════════════
+   PROGRESS BAR (chapters)
+═══════════════════════════════════════ */
+.chapter-progress{
+  display:flex;gap:1rem;margin-bottom:1.5rem;overflow-x:auto;padding-bottom:.5rem;
+  scrollbar-width:none;
+}
+.chapter-progress::-webkit-scrollbar{display:none}
+.cp-item{
+  display:flex;flex-direction:column;gap:.3rem;min-width:130px;flex:1;cursor:pointer;
+  padding:.85rem 1rem;border-radius:var(--r-sm);
+  background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.6);
+  backdrop-filter:blur(16px);
+  transition:all .22s;
+}
+.cp-item:hover,.cp-item.active{
+  background:rgba(255,255,255,.8);
+  border-color:rgba(49,208,155,.35);
+  box-shadow:0 8px 24px rgba(49,208,155,.15);
+}
+.cp-item.active .cp-name{color:var(--olive)}
+.cp-icon{font-size:1.1rem}
+.cp-name{font-size:.75rem;font-weight:700;color:var(--ink-soft)}
+.cp-amount{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--ink);letter-spacing:.02em}
+.cp-bar{height:3px;border-radius:999px;background:var(--line);margin-top:.4rem;overflow:hidden}
+.cp-bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--mint),var(--cyan))}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:1040px){
+  .pillars{grid-template-columns:repeat(2,1fr)}
+  .global-footer{grid-template-columns:1fr 1fr}
+  .chapter-progress{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:760px){
+  .page-wrap{padding:1rem}
+  .hero-card{grid-template-columns:1fr}
+  .total-box{text-align:left}
+  .meta-grid{grid-template-columns:1fr 1fr;gap:1rem}
+  .pillars{grid-template-columns:1fr 1fr}
+  .global-footer{grid-template-columns:1fr}
+  .tab-panel{padding:1.25rem 1rem}
+  .panel-header{flex-direction:column;gap:.75rem}
+  .panel-subtotal{text-align:left}
+}
+
+@media print{
+  body::before,body::after{display:none}
+  header{position:static}
+  .glass,.glass-sm{box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .tab-panel{display:block!important}
+  .tabs-header{display:none}
+  .chapter-progress{display:none}
+  .btn{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ HEADER ══════ -->
+<header>
+  <div class="header-inner">
+    <div class="nav-logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/>
+        <path d="M10 10V5a2 2 0 0 1 4 0v5"/>
+        <path d="M4 15v-3a8 8 0 0 1 16 0v3"/>
+      </svg>
+      OBRA<em>FY</em>
+    </div>
+    <div class="header-badge">Presupuesto de Obra</div>
+    <div class="header-actions">
+      <button class="btn btn-outline" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Exportar PDF
+      </button>
+      <button class="btn btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Compartir
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+
+  <!-- ══════ HERO CARD ══════ -->
+  <div class="glass hero-card">
+    <div class="hero-watermark">PRE</div>
+    <div style="position:relative;z-index:1">
+      <div class="presupuesto-badge">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Presupuesto · PRE-2025-0084
+      </div>
+      <div class="hero-title font-serif">Reforma Integral<br>Piso en Calle Balmes, Barcelona</div>
+      <div class="hero-sub" style="margin-top:.4rem">Cliente: Roberto Moya García · 3 habitaciones · 87 m² útiles · Planta 3ª</div>
+      <div class="meta-grid">
+        <div class="meta-item">
+          <label>Fecha emisión</label>
+          <span>12 de abril de 2025</span>
+        </div>
+        <div class="meta-item">
+          <label>Validez oferta</label>
+          <span>30 días</span>
+        </div>
+        <div class="meta-item">
+          <label>Plazo ejecución</label>
+          <span>10–12 semanas</span>
+        </div>
+        <div class="meta-item">
+          <label>Empresa</label>
+          <span>Reformas Castellà S.L.</span>
+        </div>
+        <div class="meta-item">
+          <label>Técnico responsable</label>
+          <span>Jordi Castellà Puig</span>
+        </div>
+        <div class="meta-item">
+          <label>Estado</label>
+          <span><span class="chip chip-orange">Pendiente firma</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="total-box">
+      <div class="t-label">Total presupuesto</div>
+      <div class="t-amount">42.860 €</div>
+      <div class="t-iva">+ IVA 21% → <strong style="color:white">51.860 €</strong></div>
+      <div class="t-ref">PRE-2025-0084 · Barcelona</div>
+    </div>
+  </div>
+
+  <!-- ══════ PILLARS ══════ -->
+  <div class="pillars">
+    <div class="pillar glass accent">
+      <div class="p-icon-wrap">🏗️</div>
+      <div class="p-label">Trabajos de obra</div>
+      <div class="p-value">18.940 €</div>
+      <div class="p-sub">Derribos, tabiquería, ayudas</div>
+    </div>
+    <div class="pillar glass">
+      <div class="p-icon-wrap">🪟</div>
+      <div class="p-label">Carpinterías y acabados</div>
+      <div class="p-value">10.200 €</div>
+      <div class="p-sub">Puertas, parquet, alicatado</div>
+    </div>
+    <div class="pillar glass">
+      <div class="p-icon-wrap">🎨</div>
+      <div class="p-label">Pintura y decoración</div>
+      <div class="p-value">7.480 €</div>
+      <div class="p-sub">Pintura, acabados, repasos</div>
+    </div>
+    <div class="pillar glass">
+      <div class="p-icon-wrap">📋</div>
+      <div class="p-label">Gestión y logística</div>
+      <div class="p-value">6.240 €</div>
+      <div class="p-sub">Permisos, transporte, limpieza</div>
+    </div>
+  </div>
+
+  <!-- ══════ CHAPTER PROGRESS ══════ -->
+  <div class="chapter-progress" id="chapterProgress">
+    <div class="cp-item active" onclick="showTab('derribos',this,0)">
+      <div class="cp-icon">🔨</div>
+      <div class="cp-name">Derribos</div>
+      <div class="cp-amount">4.299 €</div>
+      <div class="cp-bar"><div class="cp-bar-fill" style="width:100%"></div></div>
+    </div>
+    <div class="cp-item" onclick="showTab('runas',this,1)">
+      <div class="cp-icon">🚮</div>
+      <div class="cp-name">Runas</div>
+      <div class="cp-amount">1.480 €</div>
+      <div class="cp-bar"><div class="cp-bar-fill" style="width:34%"></div></div>
+    </div>
+    <div class="cp-item" onclick="showTab('permisos',this,2)">
+      <div class="cp-icon">📄</div>
+      <div class="cp-name">Permisos</div>
+      <div class="cp-amount">2.160 €</div>
+      <div class="cp-bar"><div class="cp-bar-fill" style="width:50%"></div></div>
+    </div>
+    <div class="cp-item" onclick="showTab('transporte',this,3)">
+      <div class="cp-icon">🚛</div>
+      <div class="cp-name">Transporte</div>
+      <div class="cp-amount">1.200 €</div>
+      <div class="cp-bar"><div class="cp-bar-fill" style="width:28%"></div></div>
+    </div>
+    <div class="cp-item" onclick="showTab('instalaciones',this,4)">
+      <div class="cp-icon">🔧</div>
+      <div class="cp-name">Instalaciones</div>
+      <div class="cp-amount">5.640 €</div>
+      <div class="cp-bar"><div class="cp-bar-fill" style="width:100%"></div></div>
+    </div>
+    <div class="cp-item" onclick="showTab('tabiqueria',this,5)">
+      <div class="cp-icon">🧱</div>
+      <div class="cp-name">Tabiquería</div>
+      <div class="cp-amount">4.920 €</div>
+      <div class="cp-bar"><div class="cp-bar-fill" style="width:88%"></div></div>
+    </div>
+    <div class="cp-item" onclick="showTab('alicatados',this,6)">
+      <div class="cp-icon">🪟</div>
+      <div class="cp-name">Alicatados</div>
+      <div class="cp-amount">5.024 €</div>
+      <div class="cp-bar"><div class="cp-bar-fill" style="width:90%"></div></div>
+    </div>
+    <div class="cp-item" onclick="showTab('carpinterias',this,7)">
+      <div class="cp-icon">🚪</div>
+      <div class="cp-name">Carpinterías</div>
+      <div class="cp-amount">7.480 €</div>
+      <div class="cp-bar"><div class="cp-bar-fill" style="width:100%"></div></div>
+    </div>
+    <div class="cp-item" onclick="showTab('aislamientos',this,8)">
+      <div class="cp-icon">🌡️</div>
+      <div class="cp-name">Aislamientos</div>
+      <div class="cp-amount">2.479 €</div>
+      <div class="cp-bar"><div class="cp-bar-fill" style="width:57%"></div></div>
+    </div>
+    <div class="cp-item" onclick="showTab('pintura',this,9)">
+      <div class="cp-icon">🎨</div>
+      <div class="cp-name">Pintura</div>
+      <div class="cp-amount">3.940 €</div>
+      <div class="cp-bar"><div class="cp-bar-fill" style="width:72%"></div></div>
+    </div>
+    <div class="cp-item" onclick="showTab('acabados',this,10)">
+      <div class="cp-icon">✨</div>
+      <div class="cp-name">Acabados</div>
+      <div class="cp-amount">3.538 €</div>
+      <div class="cp-bar"><div class="cp-bar-fill" style="width:65%"></div></div>
+    </div>
+    <div class="cp-item" onclick="showTab('limpieza',this,11)">
+      <div class="cp-icon">🧹</div>
+      <div class="cp-name">Limpieza</div>
+      <div class="cp-amount">1.200 €</div>
+      <div class="cp-bar"><div class="cp-bar-fill" style="width:28%"></div></div>
+    </div>
+    <div class="cp-item" onclick="showTab('repasos',this,12)">
+      <div class="cp-icon">🔍</div>
+      <div class="cp-name">Repasos</div>
+      <div class="cp-amount">1.600 €</div>
+      <div class="cp-bar"><div class="cp-bar-fill" style="width:37%"></div></div>
+    </div>
+  </div>
+
+  <!-- ══════ TABS ══════ -->
+  <div class="glass tabs-wrap">
+    <div class="tabs-header">
+      <button class="tab-btn active" onclick="showTabBtn('derribos',this)">🔨 Derribos <span class="tab-badge">5</span></button>
+      <button class="tab-btn" onclick="showTabBtn('runas',this)">🚮 Runas <span class="tab-badge">3</span></button>
+      <button class="tab-btn" onclick="showTabBtn('permisos',this)">📄 Permisos <span class="tab-badge">4</span></button>
+      <button class="tab-btn" onclick="showTabBtn('transporte',this)">🚛 Transporte <span class="tab-badge">3</span></button>
+      <button class="tab-btn" onclick="showTabBtn('instalaciones',this)">🔧 Instalaciones <span class="tab-badge">6</span></button>
+      <button class="tab-btn" onclick="showTabBtn('tabiqueria',this)">🧱 Tabiquería <span class="tab-badge">5</span></button>
+      <button class="tab-btn" onclick="showTabBtn('alicatados',this)">🪟 Alicatados <span class="tab-badge">4</span></button>
+      <button class="tab-btn" onclick="showTabBtn('carpinterias',this)">🚪 Carpinterías <span class="tab-badge">5</span></button>
+      <button class="tab-btn" onclick="showTabBtn('aislamientos',this)">🌡️ Aislamientos <span class="tab-badge">3</span></button>
+      <button class="tab-btn" onclick="showTabBtn('pintura',this)">🎨 Pintura <span class="tab-badge">4</span></button>
+      <button class="tab-btn" onclick="showTabBtn('acabados',this)">✨ Acabados dec. <span class="tab-badge">4</span></button>
+      <button class="tab-btn" onclick="showTabBtn('limpieza',this)">🧹 Limpieza <span class="tab-badge">3</span></button>
+      <button class="tab-btn" onclick="showTabBtn('repasos',this)">🔍 Repasos <span class="tab-badge">4</span></button>
+    </div>
+
+    <!-- DERRIBOS -->
+    <div class="tab-panel active" id="panel-derribos">
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-icon-wrap">🔨</div>
+          <div class="panel-title font-serif">Derribos y demoliciones</div>
+          <div class="panel-desc">Trabajos de demolición controlada y preparación de espacios</div>
+        </div>
+        <div class="panel-subtotal">
+          <div class="st-label">Subtotal capítulo</div>
+          <div class="st-amount">4.299 €</div>
+        </div>
+      </div>
+      <table class="obra-table">
+        <thead><tr><th style="width:40%">Descripción</th><th>Ud.</th><th>Cantidad</th><th>Precio/ud.</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-desc">Derribo de tabique interior de ladrillo</div><div class="td-note">Tabique 7 cm entre salón y cocina. Incluye retirada de escombros</div></td><td><span class="unidad-chip">m²</span></td><td>18,00</td><td>32,00 €</td><td>576 €</td></tr>
+          <tr><td><div class="td-desc">Demolición de solado existente (gres)</div><div class="td-note">Planta completa. Incluye retirada de capa de mortero y base</div></td><td><span class="unidad-chip">m²</span></td><td>72,00</td><td>18,50 €</td><td>1.332 €</td></tr>
+          <tr><td><div class="td-desc">Desmontaje de carpinterías interiores</div><div class="td-note">5 hojas de puertas, marcos y tapajuntas</div></td><td><span class="unidad-chip">ud</span></td><td>5</td><td>95,00 €</td><td>475 €</td></tr>
+          <tr><td><div class="td-desc">Demolición de alicatado en baños</div><div class="td-note">Baño principal (6 m²) y aseo auxiliar (4 m²)</div></td><td><span class="unidad-chip">m²</span></td><td>32,00</td><td>24,00 €</td><td>768 €</td></tr>
+          <tr><td><div class="td-desc">Apertura de rozas para nueva instalación</div><div class="td-note">Instalación eléctrica y fontanería. Rozadora mecánica</div></td><td><span class="unidad-chip">ml</span></td><td>85,00</td><td>13,50 €</td><td>1.148 €</td></tr>
+        </tbody>
+      </table>
+      <div class="table-footer"><span class="footer-total">Total Derribos: 4.299 €</span></div>
+      <div class="nota-strip">
+        <span class="nota-icon">⚠️</span>
+        <p>Los trabajos de derribo incluyen la protección de zonas no afectadas con plástico y malla. No se contempla el derribo de elementos estructurales. Cualquier imprevisto (instalaciones ocultas, humedades) se presupuestará por separado.</p>
+      </div>
+    </div>
+
+    <!-- RUNAS -->
+    <div class="tab-panel" id="panel-runas">
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-icon-wrap">🚮</div>
+          <div class="panel-title font-serif">Gestión de runas y escombros</div>
+          <div class="panel-desc">Contenedores, carga, descarga y gestión de residuos de construcción</div>
+        </div>
+        <div class="panel-subtotal"><div class="st-label">Subtotal capítulo</div><div class="st-amount">1.480 €</div></div>
+      </div>
+      <table class="obra-table">
+        <thead><tr><th style="width:40%">Descripción</th><th>Ud.</th><th>Cantidad</th><th>Precio/ud.</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-desc">Alquiler de contenedor 6 m³</div><div class="td-note">Incluye tasas municipales de ocupación de vía pública (7 días)</div></td><td><span class="unidad-chip">ud</span></td><td>2</td><td>380,00 €</td><td>760 €</td></tr>
+          <tr><td><div class="td-desc">Carga y transporte a vertedero autorizado</div><div class="td-note">Escombros inertes clasificados. Distancia máx. 35 km</div></td><td><span class="unidad-chip">t</span></td><td>8,00</td><td>42,00 €</td><td>336 €</td></tr>
+          <tr><td><div class="td-desc">Canon de vertido en planta gestora autorizada</div><div class="td-note">Tasa legal por tonelada depositada. Incluye albarán de trazabilidad</div></td><td><span class="unidad-chip">t</span></td><td>8,00</td><td>48,00 €</td><td>384 €</td></tr>
+        </tbody>
+      </table>
+      <div class="table-footer"><span class="footer-total">Total Runas: 1.480 €</span></div>
+    </div>
+
+    <!-- PERMISOS -->
+    <div class="tab-panel" id="panel-permisos">
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-icon-wrap">📄</div>
+          <div class="panel-title font-serif">Licencias y permisos</div>
+          <div class="panel-desc">Gestión administrativa, tasas municipales y documentación técnica</div>
+        </div>
+        <div class="panel-subtotal"><div class="st-label">Subtotal capítulo</div><div class="st-amount">2.160 €</div></div>
+      </div>
+      <table class="obra-table">
+        <thead><tr><th style="width:40%">Descripción</th><th>Ud.</th><th>Cantidad</th><th>Precio/ud.</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-desc">Licencia de obra menor (Ajuntament de Barcelona)</div><div class="td-note">Tasa oficial. Reforma no estructural en vivienda. Incluye gestión y presentación</div></td><td><span class="unidad-chip">ud</span></td><td>1</td><td>680,00 €</td><td>680 €</td></tr>
+          <tr><td><div class="td-desc">Ocupación de vía pública (andamio/grúa)</div><div class="td-note">Tasa por ocupación temporal. Estimación 4 semanas</div></td><td><span class="unidad-chip">sem</span></td><td>4</td><td>120,00 €</td><td>480 €</td></tr>
+          <tr><td><div class="td-desc">Proyecto técnico de reforma (arquitecto)</div><div class="td-note">Memoria descriptiva, planos y justificación. Visado colegial incluido</div></td><td><span class="unidad-chip">ud</span></td><td>1</td><td>750,00 €</td><td>750 €</td></tr>
+          <tr><td><div class="td-desc">Certificado final de obra</div><div class="td-note">Documento oficial emitido por técnico competente</div></td><td><span class="unidad-chip">ud</span></td><td>1</td><td>250,00 €</td><td>250 €</td></tr>
+        </tbody>
+      </table>
+      <div class="table-footer"><span class="footer-total">Total Permisos: 2.160 €</span></div>
+      <div class="nota-strip">
+        <span class="nota-icon">ℹ️</span>
+        <p>Las tasas municipales son orientativas y pueden variar según resolución del Ajuntament. El importe final se liquidará a coste real con justificante.</p>
+      </div>
+    </div>
+
+    <!-- TRANSPORTE -->
+    <div class="tab-panel" id="panel-transporte">
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-icon-wrap">🚛</div>
+          <div class="panel-title font-serif">Transporte y logística</div>
+          <div class="panel-desc">Acarreos, portes de materiales y desplazamientos de cuadrilla</div>
+        </div>
+        <div class="panel-subtotal"><div class="st-label">Subtotal capítulo</div><div class="st-amount">1.200 €</div></div>
+      </div>
+      <table class="obra-table">
+        <thead><tr><th style="width:40%">Descripción</th><th>Ud.</th><th>Cantidad</th><th>Precio/ud.</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-desc">Porte de materiales a pie de obra</div><div class="td-note">Camión 3.500 kg. Alicatado, tabiquería y materiales secos</div></td><td><span class="unidad-chip">viaje</span></td><td>4</td><td>180,00 €</td><td>720 €</td></tr>
+          <tr><td><div class="td-desc">Alquiler de montacargas exterior</div><div class="td-note">Subida de materiales pesados. Piso 3ª planta sin ascensor de carga</div></td><td><span class="unidad-chip">día</span></td><td>3</td><td>120,00 €</td><td>360 €</td></tr>
+          <tr><td><div class="td-desc">Desplazamientos de cuadrilla especialista</div><div class="td-note">Fontanería + electricidad. Incluye furgoneta herramientas</div></td><td><span class="unidad-chip">ud</span></td><td>1</td><td>120,00 €</td><td>120 €</td></tr>
+        </tbody>
+      </table>
+      <div class="table-footer"><span class="footer-total">Total Transporte: 1.200 €</span></div>
+    </div>
+
+    <!-- INSTALACIONES -->
+    <div class="tab-panel" id="panel-instalaciones">
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-icon-wrap">🔧</div>
+          <div class="panel-title font-serif">Instalaciones (ayudas)</div>
+          <div class="panel-desc">Trabajos de albañilería para ayuda a gremios: fontanería, electricidad, climatización</div>
+        </div>
+        <div class="panel-subtotal"><div class="st-label">Subtotal capítulo</div><div class="st-amount">5.640 €</div></div>
+      </div>
+      <table class="obra-table">
+        <thead><tr><th style="width:40%">Descripción</th><th>Ud.</th><th>Cantidad</th><th>Precio/ud.</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-desc">Instalación eléctrica completa (ICP, cuadro y circuitos)</div><div class="td-note">16 circuitos, grado de electrificación elevado. Material LEGRAND. Boletín incluido</div></td><td><span class="unidad-chip">m²</span></td><td>87</td><td>28,00 €</td><td>2.436 €</td></tr>
+          <tr><td><div class="td-desc">Instalación de fontanería (agua fría y caliente)</div><div class="td-note">Tubo multicapa. 2 baños + cocina. Llaves de paso individuales</div></td><td><span class="unidad-chip">ud</span></td><td>1</td><td>1.240,00 €</td><td>1.240 €</td></tr>
+          <tr><td><div class="td-desc">Instalación de saneamiento y desagüe</div><div class="td-note">PVC serie B. Botes sifónicos y colectores. Conexión a bajante existente</div></td><td><span class="unidad-chip">ud</span></td><td>1</td><td>680,00 €</td><td>680 €</td></tr>
+          <tr><td><div class="td-desc">Instalación de aerotermia (bomba de calor)</div><div class="td-note">Equipo Daikin 7 kW. Suelo radiante en salón + radiadores. Instalación split previa</div></td><td><span class="unidad-chip">ud</span></td><td>1</td><td>880,00 €</td><td>880 €</td></tr>
+          <tr><td><div class="td-desc">Cableado de telecomunicaciones (RJ45 + fibra)</div><div class="td-note">4 puntos de red cat 6A. Rack en armario técnico. Instalación coax TV</div></td><td><span class="unidad-chip">punto</span></td><td>4</td><td>76,00 €</td><td>304 €</td></tr>
+          <tr><td><div class="td-desc">Apertura y cierre de rozas para gremios</div><div class="td-note">Ayuda albañilería post-instalación. Cierre con mortero y malla antigretak</div></td><td><span class="unidad-chip">ml</span></td><td>40</td><td>8,00 €</td><td>100 €</td></tr>
+        </tbody>
+      </table>
+      <div class="table-footer"><span class="footer-total">Total Instalaciones: 5.640 €</span></div>
+    </div>
+
+    <!-- TABIQUERÍA -->
+    <div class="tab-panel" id="panel-tabiqueria">
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-icon-wrap">🧱</div>
+          <div class="panel-title font-serif">Tabiquería seca y de obra</div>
+          <div class="panel-desc">Nueva distribución interior con tabique pladur y ladrillo cerámico</div>
+        </div>
+        <div class="panel-subtotal"><div class="st-label">Subtotal capítulo</div><div class="st-amount">4.920 €</div></div>
+      </div>
+      <table class="obra-table">
+        <thead><tr><th style="width:40%">Descripción</th><th>Ud.</th><th>Cantidad</th><th>Precio/ud.</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-desc">Tabique de pladur doble placa 15+15 mm (resistente humedad)</div><div class="td-note">En baños y aseo. Estructura metálica 70 mm. Lana mineral interior 40 mm</div></td><td><span class="unidad-chip">m²</span></td><td>42,00</td><td>48,00 €</td><td>2.016 €</td></tr>
+          <tr><td><div class="td-desc">Tabique de pladur estándar placa 13 mm</div><div class="td-note">Distribución habitaciones. Estructura 48 mm. Lana roca acústica</div></td><td><span class="unidad-chip">m²</span></td><td>36,00</td><td>38,00 €</td><td>1.368 €</td></tr>
+          <tr><td><div class="td-desc">Tabique de ladrillo hueco sencillo (7 cm)</div><div class="td-note">Cerramiento de cocina y armarios empotrados. Mortero cola M-5</div></td><td><span class="unidad-chip">m²</span></td><td>14,00</td><td>42,00 €</td><td>588 €</td></tr>
+          <tr><td><div class="td-desc">Formación de peldaños y escalón en acceso</div><div class="td-note">Hormigón en masa. 2 peldaños de acceso desde entrada</div></td><td><span class="unidad-chip">ud</span></td><td>2</td><td>180,00 €</td><td>360 €</td></tr>
+          <tr><td><div class="td-desc">Guarnecido y enfoscado de techos</div><div class="td-note">Yeso proyectado en zonas de derribo. Regularización de superficie</div></td><td><span class="unidad-chip">m²</span></td><td>24,00</td><td>24,50 €</td><td>588 €</td></tr>
+        </tbody>
+      </table>
+      <div class="table-footer"><span class="footer-total">Total Tabiquería: 4.920 €</span></div>
+    </div>
+
+    <!-- ALICATADOS -->
+    <div class="tab-panel" id="panel-alicatados">
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-icon-wrap">🪟</div>
+          <div class="panel-title font-serif">Alicatados y solados</div>
+          <div class="panel-desc">Revestimientos cerámicos en baños, cocina y solado general</div>
+        </div>
+        <div class="panel-subtotal"><div class="st-label">Subtotal capítulo</div><div class="st-amount">5.024 €</div></div>
+      </div>
+      <table class="obra-table">
+        <thead><tr><th style="width:40%">Descripción</th><th>Ud.</th><th>Cantidad</th><th>Precio/ud.</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-desc">Suministro y colocación de parquet laminado AC5</div><div class="td-note">Roble natural 8 mm. Salón, pasillo y habitaciones. Zócalo incluido</div></td><td><span class="unidad-chip">m²</span></td><td>58,00</td><td>38,00 €</td><td>2.204 €</td></tr>
+          <tr><td><div class="td-desc">Alicatado baño principal (porcelánico 60×60)</div><div class="td-note">Porcelánico imitación mármol Calacatta. Suelo + paredes hasta techo</div></td><td><span class="unidad-chip">m²</span></td><td>24,00</td><td>62,00 €</td><td>1.488 €</td></tr>
+          <tr><td><div class="td-desc">Alicatado aseo auxiliar (gres 30×60)</div><div class="td-note">Gres mate blanco roto. Suelo antideslizante + 3 hiladas de pared</div></td><td><span class="unidad-chip">m²</span></td><td>16,00</td><td>48,00 €</td><td>768 €</td></tr>
+          <tr><td><div class="td-desc">Solado de cocina (baldosa 45×45 antideslizante)</div><div class="td-note">Gres porcelánico antideslizante clase 3. Incluye rodapié cerámico</div></td><td><span class="unidad-chip">m²</span></td><td>12,00</td><td>47,00 €</td><td>564 €</td></tr>
+        </tbody>
+      </table>
+      <div class="table-footer"><span class="footer-total">Total Alicatados: 5.024 €</span></div>
+    </div>
+
+    <!-- CARPINTERÍAS -->
+    <div class="tab-panel" id="panel-carpinterias">
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-icon-wrap">🚪</div>
+          <div class="panel-title font-serif">Carpinterías</div>
+          <div class="panel-desc">Puertas interiores, armarios, ventanas y cerrajería</div>
+        </div>
+        <div class="panel-subtotal"><div class="st-label">Subtotal capítulo</div><div class="st-amount">7.480 €</div></div>
+      </div>
+      <table class="obra-table">
+        <thead><tr><th style="width:40%">Descripción</th><th>Ud.</th><th>Cantidad</th><th>Precio/ud.</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-desc">Puerta ciega interior block lisa lacada en blanco</div><div class="td-note">Con marco y tapajuntas. 72.5×203 cm. Pomo niquelado satinado</div></td><td><span class="unidad-chip">ud</span></td><td>5</td><td>480,00 €</td><td>2.400 €</td></tr>
+          <tr><td><div class="td-desc">Armario empotrado a medida (melamínico)</div><div class="td-note">2 módulos de 2 m de ancho. Fondo 60 cm. Puertas batientes lacadas blanco</div></td><td><span class="unidad-chip">ud</span></td><td>2</td><td>1.100,00 €</td><td>2.200 €</td></tr>
+          <tr><td><div class="td-desc">Ventana corredera PVC (doble acristalamiento)</div><div class="td-note">Climalit 4+12+4. Rotura de puente térmico. Persiana enrollable incluida</div></td><td><span class="unidad-chip">ud</span></td><td>3</td><td>620,00 €</td><td>1.860 €</td></tr>
+          <tr><td><div class="td-desc">Puerta de entrada acorazada</div><div class="td-note">Seguridad 5 puntos de cierre. Acabado madera lacada. Cerrojo homologado</div></td><td><span class="unidad-chip">ud</span></td><td>1</td><td>780,00 €</td><td>780 €</td></tr>
+          <tr><td><div class="td-desc">Puerta de paso corredera de cristal satinado</div><div class="td-note">Separación salón-cocina. Marco de aluminio negro mate. 90 cm</div></td><td><span class="unidad-chip">ud</span></td><td>1</td><td>240,00 €</td><td>240 €</td></tr>
+        </tbody>
+      </table>
+      <div class="table-footer"><span class="footer-total">Total Carpinterías: 7.480 €</span></div>
+    </div>
+
+    <!-- AISLAMIENTOS -->
+    <div class="tab-panel" id="panel-aislamientos">
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-icon-wrap">🌡️</div>
+          <div class="panel-title font-serif">Aislamientos</div>
+          <div class="panel-desc">Aislamiento térmico y acústico. Fachada, forjados y tabiques</div>
+        </div>
+        <div class="panel-subtotal"><div class="st-label">Subtotal capítulo</div><div class="st-amount">2.479 €</div></div>
+      </div>
+      <table class="obra-table">
+        <thead><tr><th style="width:40%">Descripción</th><th>Ud.</th><th>Cantidad</th><th>Precio/ud.</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-desc">Trasdosado aislante en fachada exterior (XPS 50 mm)</div><div class="td-note">Espuma de poliestireno extruido. Pared exterior sur. Cámara ventilada</div></td><td><span class="unidad-chip">m²</span></td><td>24,00</td><td>52,00 €</td><td>1.248 €</td></tr>
+          <tr><td><div class="td-desc">Lana de roca en tabiquería (separación viviendas)</div><div class="td-note">Manta MW 50 mm. Rw 48 dB. Medianera con vivienda colindante</div></td><td><span class="unidad-chip">m²</span></td><td>28,00</td><td>22,00 €</td><td>616 €</td></tr>
+          <tr><td><div class="td-desc">Aislamiento acústico de impacto en solado</div><div class="td-note">Lámina polietileno reticulado 5 mm bajo parquet. Toda la superficie</div></td><td><span class="unidad-chip">m²</span></td><td>58,00</td><td>10,60 €</td><td>615 €</td></tr>
+        </tbody>
+      </table>
+      <div class="table-footer"><span class="footer-total">Total Aislamientos: 2.479 €</span></div>
+    </div>
+
+    <!-- PINTURA -->
+    <div class="tab-panel" id="panel-pintura">
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-icon-wrap">🎨</div>
+          <div class="panel-title font-serif">Pintura</div>
+          <div class="panel-desc">Aplicación de pintura plástica, imprimación y preparación de superficies</div>
+        </div>
+        <div class="panel-subtotal"><div class="st-label">Subtotal capítulo</div><div class="st-amount">3.940 €</div></div>
+      </div>
+      <table class="obra-table">
+        <thead><tr><th style="width:40%">Descripción</th><th>Ud.</th><th>Cantidad</th><th>Precio/ud.</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-desc">Pintura plástica dos manos (paredes y techos)</div><div class="td-note">Color blanco roto RAL 9001. Previo imprimación fijadora. Toda la vivienda</div></td><td><span class="unidad-chip">m²</span></td><td>310,00</td><td>9,80 €</td><td>3.038 €</td></tr>
+          <tr><td><div class="td-desc">Pintura de esmalte en carpintería de madera</div><div class="td-note">Marcos, rodapiés y contraventanas interiores. Acabado satinado</div></td><td><span class="unidad-chip">m²</span></td><td>28,00</td><td>18,00 €</td><td>504 €</td></tr>
+          <tr><td><div class="td-desc">Pared de acento en salón (color grafito)</div><div class="td-note">1 pared de salón. Color Farrow&amp;Ball Railings nº 31. Pintura de alta calidad</div></td><td><span class="unidad-chip">m²</span></td><td>14,00</td><td>22,00 €</td><td>308 €</td></tr>
+          <tr><td><div class="td-desc">Barniz protector de suelo de madera</div><div class="td-note">Barniz mate a base de agua. 3 capas. Zona cocina y acceso</div></td><td><span class="unidad-chip">m²</span></td><td>10,00</td><td>9,00 €</td><td>90 €</td></tr>
+        </tbody>
+      </table>
+      <div class="table-footer"><span class="footer-total">Total Pintura: 3.940 €</span></div>
+    </div>
+
+    <!-- ACABADOS -->
+    <div class="tab-panel" id="panel-acabados">
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-icon-wrap">✨</div>
+          <div class="panel-title font-serif">Acabados decorativos</div>
+          <div class="panel-desc">Molduras, cornisas, microcemento, papel pintado y elementos especiales</div>
+        </div>
+        <div class="panel-subtotal"><div class="st-label">Subtotal capítulo</div><div class="st-amount">3.538 €</div></div>
+      </div>
+      <table class="obra-table">
+        <thead><tr><th style="width:40%">Descripción</th><th>Ud.</th><th>Cantidad</th><th>Precio/ud.</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-desc">Microcemento en ducha baño principal</div><div class="td-note">Suelo + 3 paredes. 2 capas + sellador antihumedad. Color cemento gris</div></td><td><span class="unidad-chip">m²</span></td><td>9,00</td><td>120,00 €</td><td>1.080 €</td></tr>
+          <tr><td><div class="td-desc">Moldura de escayola en techo (cornisa)</div><div class="td-note">Perfil A-11 de 70 mm. Salón y pasillo. Incluye pintura</div></td><td><span class="unidad-chip">ml</span></td><td>32,00</td><td>28,00 €</td><td>896 €</td></tr>
+          <tr><td><div class="td-desc">Papel pintado en habitación principal</div><div class="td-note">Vinílico lavable textura botánica. Suministro e instalación. 1 pared</div></td><td><span class="unidad-chip">m²</span></td><td>14,00</td><td>48,00 €</td><td>672 €</td></tr>
+          <tr><td><div class="td-desc">Instalación de encimera de cocina (silestone)</div><div class="td-note">Encimera Silestone Stellar Snow 2 cm. 3,20 ml. Corte + instalación</div></td><td><span class="unidad-chip">ml</span></td><td>3,20</td><td>278,00 €</td><td>890 €</td></tr>
+        </tbody>
+      </table>
+      <div class="table-footer"><span class="footer-total">Total Acabados decorativos: 3.538 €</span></div>
+    </div>
+
+    <!-- LIMPIEZA -->
+    <div class="tab-panel" id="panel-limpieza">
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-icon-wrap">🧹</div>
+          <div class="panel-title font-serif">Limpieza de obra</div>
+          <div class="panel-desc">Limpiezas intermedias, final de obra y retirada de embalajes</div>
+        </div>
+        <div class="panel-subtotal"><div class="st-label">Subtotal capítulo</div><div class="st-amount">1.200 €</div></div>
+      </div>
+      <table class="obra-table">
+        <thead><tr><th style="width:40%">Descripción</th><th>Ud.</th><th>Cantidad</th><th>Precio/ud.</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-desc">Limpieza intermedia de obra (semanal)</div><div class="td-note">Retirada de embalajes, polvo y recortes. Mantenimiento de zona de trabajo ordenada</div></td><td><span class="unidad-chip">sem</span></td><td>8</td><td>60,00 €</td><td>480 €</td></tr>
+          <tr><td><div class="td-desc">Limpieza final profesional post-obra</div><div class="td-note">Empresa especializada. Suelos, cristales, baños y cocina. Aspiración y fregado</div></td><td><span class="unidad-chip">ud</span></td><td>1</td><td>560,00 €</td><td>560 €</td></tr>
+          <tr><td><div class="td-desc">Retirada de embalajes y sobrante de material</div><div class="td-note">Cajas de parquet, palets de cerámica y restos de instalación</div></td><td><span class="unidad-chip">ud</span></td><td>1</td><td>160,00 €</td><td>160 €</td></tr>
+        </tbody>
+      </table>
+      <div class="table-footer"><span class="footer-total">Total Limpieza: 1.200 €</span></div>
+    </div>
+
+    <!-- REPASOS -->
+    <div class="tab-panel" id="panel-repasos">
+      <div class="panel-header">
+        <div class="panel-title-wrap">
+          <div class="panel-icon-wrap">🔍</div>
+          <div class="panel-title font-serif">Recogida y repasos</div>
+          <div class="panel-desc">Inspección final, corrección de deficiencias y entrega de obra</div>
+        </div>
+        <div class="panel-subtotal"><div class="st-label">Subtotal capítulo</div><div class="st-amount">1.600 €</div></div>
+      </div>
+      <table class="obra-table">
+        <thead><tr><th style="width:40%">Descripción</th><th>Ud.</th><th>Cantidad</th><th>Precio/ud.</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td><div class="td-desc">Visita de inspección y lista de repasos</div><div class="td-note">Técnico + jefe de obra. Recorrido conjunto con cliente. Acta de observaciones</div></td><td><span class="unidad-chip">ud</span></td><td>2</td><td>180,00 €</td><td>360 €</td></tr>
+          <tr><td><div class="td-desc">Jornada de repasos general (2 operarios)</div><div class="td-note">Remates de pintura, silicona, ajuste de puertas y tapas de instalaciones</div></td><td><span class="unidad-chip">día</span></td><td>2</td><td>480,00 €</td><td>960 €</td></tr>
+          <tr><td><div class="td-desc">Sellado de juntas y silicona en baños y cocina</div><div class="td-note">Silicona neutra antimoho color blanco. Encuentros suelo-pared y encimera</div></td><td><span class="unidad-chip">ml</span></td><td>28,00</td><td>6,00 €</td><td>168 €</td></tr>
+          <tr><td><div class="td-desc">Recogida y devolución de llaves / acta de entrega</div><div class="td-note">Documentación final, garantías y manual de uso de instalaciones entregado al cliente</div></td><td><span class="unidad-chip">ud</span></td><td>1</td><td>112,00 €</td><td>112 €</td></tr>
+        </tbody>
+      </table>
+      <div class="table-footer"><span class="footer-total">Total Recogida y repasos: 1.600 €</span></div>
+      <div class="nota-strip nota-green">
+        <span class="nota-icon">✅</span>
+        <p>Incluye garantía de 12 meses en mano de obra a partir de la firma del acta de entrega. Los materiales se rigen por la garantía de fabricante (mínimo 2 años).</p>
+      </div>
+    </div>
+
+  </div><!-- /tabs-wrap -->
+
+  <!-- ══════ GLOBAL FOOTER ══════ -->
+  <div class="glass global-footer">
+    <div class="gf-section">
+      <h4>Condiciones de pago</h4>
+      <ul>
+        <li>30% a la firma del contrato</li>
+        <li>40% a mitad de obra</li>
+        <li>30% a la entrega y repasos</li>
+        <li>Pago mediante transferencia bancaria</li>
+        <li>Factura con IVA 21%</li>
+      </ul>
+    </div>
+    <div class="gf-section">
+      <h4>No incluye</h4>
+      <ul>
+        <li>Mobiliario y electrodomésticos</li>
+        <li>Cocina (muebles y módulos)</li>
+        <li>Aparatos sanitarios y griferías</li>
+        <li>Luminarias e iluminación</li>
+        <li>Imprevistos no reflejados en este presupuesto</li>
+      </ul>
+    </div>
+    <div class="gf-section">
+      <div class="resumen-final">
+        <div class="rf-row"><span>Base imponible</span><span>42.860 €</span></div>
+        <div class="rf-row"><span>IVA (21%)</span><span>9.000 €</span></div>
+        <div class="rf-row total-row"><span>TOTAL</span><span>51.860 €</span></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<script>
+// ── Sync tabs + chapter progress
+function syncAll(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.cp-item').forEach(c => c.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+function showTabBtn(name, btn) {
+  syncAll(name);
+  btn.classList.add('active');
+  // sync chapter progress
+  const idx = btn.closest('.tabs-header').querySelectorAll('.tab-btn');
+  const cpItems = document.querySelectorAll('.cp-item');
+  idx.forEach((b,i) => { if(b===btn && cpItems[i]) cpItems[i].classList.add('active'); });
+}
+
+function showTab(name, cpItem) {
+  syncAll(name);
+  cpItem.classList.add('active');
+  // sync tab btn
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const cpItems = document.querySelectorAll('.cp-item');
+  cpItems.forEach((c,i) => { if(c===cpItem && tabBtns[i]) tabBtns[i].classList.add('active'); });
+}
+
+// Scroll active tab into view in header
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    setTimeout(() => btn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}), 100);
+  });
+});
+</script>
+</body>
+</html>
